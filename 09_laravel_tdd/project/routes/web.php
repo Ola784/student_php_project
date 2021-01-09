@@ -23,9 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/{url}/admin',function ($url){
-    $base=DB::select('select * from users WHERE url=?',[$url]);
-    return view('comment.index',['comments'=>$base]);
-})->middleware(['auth']);
+Route::get('/{url}/admin','App\Http\Controllers\PageController@index'
+)->middleware(['auth']);
 
 require __DIR__.'/auth.php';
