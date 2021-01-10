@@ -6,12 +6,26 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+                <br>
+                <div class="flex">
+                    {{--  <form method="get" action="{{ route('post.create') }}">--}}
+                    <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
+                        {{ __('menu') }}
+                    </x-button>
+                    {{--  <form method="get" action="{{ route('post.create') }}">--}}
+                    <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
+                        {{ __('posts') }}
+                    </x-button>
+                    {{--   </form>--}}
+                    {{--   <form method="get" action="{{ route('gallery.create') }}">--}}
+                    <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
+                        {{ __('gallery ') }}
+                    </x-button>
+                    {{--  </form>--}}
                 </div>
+                <br>
             </div>
         </div>
-    </div>
 </x-app-layout>
