@@ -12,7 +12,7 @@
                 <div class="flex">
                     {{--  <form method="get" action="{{ route('post.create') }}">--}}
                     <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
-                        {{ __('menu') }}
+                        {{ __('menus') }}
                     </x-button>
                     {{--  <form method="get" action="{{ route('post.create') }}">--}}
                     <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
