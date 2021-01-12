@@ -9,6 +9,8 @@ $I->seeCurrentUrlEquals('/login');
 
 $I->fillField('email', 'john.doe@gmail.com');
 $I->fillField('password', 'secret');
+$I->fillField('url', 'mypage.com');
+
 
 $I->click('Login');
 
