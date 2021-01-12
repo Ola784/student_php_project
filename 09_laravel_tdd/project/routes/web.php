@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@index')->name('index');
 Route::resource('/comments', App\Http\Controllers\CommentController::class);
 
 Route::get('/dashboard', function () {
