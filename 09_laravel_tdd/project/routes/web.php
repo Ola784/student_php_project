@@ -28,3 +28,5 @@ Route::resource('/{url}/admin',App\Http\Controllers\PageController::class
 require __DIR__.'/auth.php';
 
 Route::resource('/menus',App\Http\Controllers\MenuController::class)->middleware('auth');
+
+Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class);

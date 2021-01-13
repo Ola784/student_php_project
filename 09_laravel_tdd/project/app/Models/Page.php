@@ -10,5 +10,11 @@ class Page extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+    public function website(){
+        return $this->hasOne(Website::class);
+    }
+    public function menu(){
+        return $this->hasMany(Menu::class);
+    }
     use HasFactory;
 }

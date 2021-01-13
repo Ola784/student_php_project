@@ -12,7 +12,7 @@ class MenuController extends Controller
         $menus = Menu::all();
          return view('menus.index')->withMenus($menus);
     }
-
+/*
     public function create()
     {
         return view('menus.create');
@@ -60,5 +60,5 @@ class MenuController extends Controller
         $menu->delete();
 
         return redirect()->route('menus.index');
-    }
+    }*/
 }

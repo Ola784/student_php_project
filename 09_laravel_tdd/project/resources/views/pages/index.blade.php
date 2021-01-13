@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <br>
                 <div class="flex">
-                     <form method="get" action="/menus">
+                     <form method="get" action="{{ route('pages.menus.create',$page) }}">
                     <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                         {{ __('menus') }}
                     </x-button>
