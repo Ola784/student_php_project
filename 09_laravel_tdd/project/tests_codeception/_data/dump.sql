@@ -222,7 +222,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$eZLnwhQjfTLQr/Vr2KfouOKBaRgKz/VbAFUZ5/0et4LDE112f1v2K',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$jGagO26/pSPMnX4NSdAQ2OUJzbhIakIKo4RlESwgnQcwiH.8Fmvb2',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -235,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-12 21:35:12
+-- Dump completed on 2021-01-13 11:41:53
