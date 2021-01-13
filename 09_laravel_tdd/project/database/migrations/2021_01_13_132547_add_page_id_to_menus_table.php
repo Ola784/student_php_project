@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagesTable extends Migration
+class AddPageIdToMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->timestamps();
+        Schema::table('menus', function (Blueprint $table) {
+            $table->foreignId('page_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -27,6 +25,9 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::table('menus', function (Blueprint $table) {
+            $table->dropForeign(['page_id']);
+            $table->dropColumn('page_id');
+        });
     }
 }
