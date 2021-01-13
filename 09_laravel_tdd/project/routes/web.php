@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GalleryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +34,7 @@ Route::resource('/menus',App\Http\Controllers\MenuController::class)->middleware
 Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class);
 
 Route::resource('/pages', App\Http\Controllers\PageController::class);
+
+Route::get('/gallery', [GalleryController::class, 'index']);
+Route::post('/gallery', [GalleryController::class, 'upload']);
+Route::delete('/gallery/{id}', [GalleryController::class, 'destroy']);
