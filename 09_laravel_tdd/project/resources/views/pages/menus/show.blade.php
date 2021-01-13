@@ -29,13 +29,13 @@
                             </div>
                             <div class="bg-white px-4 pb-5 flex items-center justify-end mt-4">
 
-                                <form method="get" action="{{ route('pages.menus.edit', $menu) }}">
+                                <form method="get" action="{{ route('pages.menus.edit', [$page,$menu]) }}">
                                     <x-button class="ml-4">
                                         {{ __('Edit') }}
                                     </x-button>
                                 </form>
 
-                                <form method="post" action="{{ route('pages.menus.destroy', $menu) }}">
+                                <form method="post" action="{{ route('pages.menus.destroy', [$page,$menu]) }}">
 
                                     @csrf
                                     @method("DELETE")

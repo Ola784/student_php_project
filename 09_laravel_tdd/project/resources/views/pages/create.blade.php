@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Editing a menu') }}
+            {{ __('Creating a page') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -11,22 +11,20 @@
 
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                    <form method="post" action="{{ route('pages.menus.update', [$page,$menu]) }}">
+                    <form method="post" action="{{ route('pages.store') }}">
 
                         @csrf
-                        @method("PUT")
 
 
                         <div class="mt-4">
                             <x-label for="title" :value="__('Title')" />
-                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="$menu->title" />
+                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
                         </div>
-
 
                         <div class="flex items-center justify-end mt-4">
 
                             <x-button class="ml-4">
-                                {{ __('Update') }}
+                                {{ __('Create') }}
                             </x-button>
                         </div>
                     </form>
