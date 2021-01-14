@@ -25,8 +25,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-/*Route::resource('/{url}/admin',App\Http\Controllers\PageController::class
-)->middleware(['auth']);*/
+// Route::resource('/{url}/admin',App\Http\Controllers\PageController::class
+// )->middleware(['auth']);
 require __DIR__.'/auth.php';
 /*
 Route::resource('/menus',App\Http\Controllers\MenuController::class)->middleware('auth');
@@ -40,8 +40,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('pages', App\Http\Controllers\PageController::class);
     Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
-
+    
 });
-Route::get('/gallery', [GalleryController::class, 'index']);
-Route::post('/gallery', [GalleryController::class, 'upload']);
-Route::delete('/gallery/{id}', [GalleryController::class, 'destroy']);
+
+Route::get('/{url}/admin/gallery', [GalleryController::class, 'index']);
+Route::post('/{url}/admin/gallery', [GalleryController::class, 'upload']);
+Route::delete('/{url}/admin/gallery/{id}', [GalleryController::class, 'destroy']);
