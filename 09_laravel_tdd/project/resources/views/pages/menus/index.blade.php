@@ -30,7 +30,7 @@
                                     <div class="text-sm text-gray-900">{{ $menu->title }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('pages.menus.show', [$page,$menu]) }}" class="text-indigo-600 hover:text-indigo-900">Details</a>
+                                    <a href="{{ route('pages.menus.show', [$url, $page, $menu]) }}" class="text-indigo-600 hover:text-indigo-900">Details</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -39,7 +39,7 @@
                 @endif
 
                 <div class="flex items-center justify-end mt-4 px-4 pb-5">
-                    <form method="get" action="{{ route('pages.menus.create',$page) }}">
+                    <form method="get" action="{{ route('pages.menus.create', [$url, $page]) }}">
                         <x-button class="ml-4">
                             {{ __('Create new...') }}
                         </x-button>

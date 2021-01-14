@@ -8,59 +8,59 @@ use App\Models\Menu;
 
 class PageMenuController extends Controller
 {
-    public function index(Page $page)
+    public function index(String $url, Page $page)
     {
         $menus=$page->menu()->get();
-        return view('pages.menus.index', compact('page', 'menus'));
+        return view('pages.menus.index', ['url' => $url], compact('page', 'menus'));
     }
 
-    public function create(Page $page)
+    public function create(String $url, Page $page)
     {
 
-        return view('pages.menus.create', compact('page'));
+        return view('pages.menus.create', ['url' => $url], compact('page'));
     }
 
-    public function store(Page $page,Request $request )
+    public function store(String $url, Page $page,Request $request )
     {
         $menus=$page->menu()->create($this->validate($request, [
             'title' => 'required'
         ]));
-        return redirect()->route('pages.menus.show',[$page,$menus]);
+        return redirect()->route('pages.menus.show', [$url, $page, $menus]);
     }
 
-    public function show(Page $page, Menu $menu)
+    public function show(String $url, Page $page, Menu $menu)
     {
         if($menu->page_id!=$page->id)
         {
             abort(404);
         }
-        return view('pages.menus.show',compact('page','menu'));
+        return view('pages.menus.show', ['url' => $url], compact('page','menu'));
     }
 
-    public function edit(Page $page, Menu $menu)
+    public function edit(String $url, Page $page, Menu $menu)
     {
         if($menu->page_id!=$page->id)
         {
             abort(404);
         }
-        return view('pages.menus.edit',compact('page','menu'));
+        return view('pages.menus.edit', ['url' => $url],compact('page','menu'));
     }
 
-    public function update(Request $request, Page $page, Menu $menu)
+    public function update(String $url, Request $request, Page $page, Menu $menu)
     {
         $menu->update($this->validate($request, [
             'title' => 'required'
         ]));
-        return redirect()->route('pages.menus.show',[$page,$menu]);
+        return redirect()->route('pages.menus.show', [$url, $page,$menu]);
     }
 
-    public function destroy(Page $page, Menu $menu)
+    public function destroy(String $url, Page $page, Menu $menu)
     {
         if($menu->page_id!=$page->id)
         {
             abort(404);
         }
         $menu->delete();
-        return redirect()->route('pages.menus.index', $page);
+        return redirect()->route('pages.menus.index', [$url, $page]);
     }
 }
