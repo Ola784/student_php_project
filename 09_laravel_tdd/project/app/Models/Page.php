@@ -16,5 +16,8 @@ class Page extends Model
     public function menu(){
         return $this->hasMany(Menu::class);
     }
+    public function post(){
+        return $this->hasMany(Post::class);
+    }
     use HasFactory;
 }
