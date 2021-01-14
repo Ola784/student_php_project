@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\FinalGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,14 +36,14 @@ Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class);*
 
 //Route::resource('/pages', App\Http\Controllers\PageController::class);
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-
-
+    Route::get('', [App\Http\Controllers\PageController::class, 'index']);
     Route::resource('pages', App\Http\Controllers\PageController::class);
     Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
-    
+    Route::get('gallery', [GalleryController::class, 'index']);
+    Route::post('gallery', [GalleryController::class, 'upload']);
+    Route::delete('gallery/{id}', [GalleryController::class, 'destroy']);
 });
 
-Route::get('/{url}/admin/gallery', [GalleryController::class, 'index']);
-Route::post('/{url}/admin/gallery', [GalleryController::class, 'upload']);
-Route::delete('/{url}/admin/gallery/{id}', [GalleryController::class, 'destroy']);
+// na finalnej stronie:
+Route::get('gallery', [FinalGalleryController::class, 'index']);

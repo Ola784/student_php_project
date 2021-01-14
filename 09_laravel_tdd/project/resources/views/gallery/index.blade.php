@@ -34,8 +34,8 @@
 
 <div class="container">
 
-    <h3>Laravel - Image Gallery CRUD Example</h3>
-    <form action="{{ url('gallery') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
+    <h3>ADMIN GALLERY</h3>
+    <form action="{{ url('admin/gallery') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
 
 
         {!! csrf_field() !!}
@@ -93,7 +93,7 @@
                             <small class='text-muted'>{{ $image->title }}</small>
                         </div> <!-- text-center / end -->
                     </a>
-                    <form action="{{ url('gallery',$image->id) }}" method="POST">
+                    <form action="{{ url('admin.gallery',$image->id) }}" method="POST">
                     <input type="hidden" name="_method" value="delete">
                     {!! csrf_field() !!}
                     <button type="submit" class="close-icon btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>

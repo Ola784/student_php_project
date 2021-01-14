@@ -9,10 +9,10 @@ class Gallery extends Model
 {
     use HasFactory;
 
-    // public function page()
-    // {
-    //     return $this->belongsTo(Page::class);
-    // }
+    public function page()
+    {
+        return $this->belongsTo(Page::class);
+    }
 
     protected $table = 'gallery';
 

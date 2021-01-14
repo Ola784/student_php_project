@@ -15,7 +15,7 @@ class GalleryController extends Controller
     public function index()
     {
         $images = Gallery::get();
-        return view('gallery', compact('images'));
+        return view('gallery.index', compact('images'));
     }
 
     public function upload(Request $request)
