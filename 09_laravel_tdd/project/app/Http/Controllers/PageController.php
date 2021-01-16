@@ -37,4 +37,26 @@ class PageController extends Controller
         return redirect()->route('pages.show', [$url, $page]);
     }
 
+    public function edit(String $url,Page $page)
+    {
+        return view('pages.edit',['url' => $url])->withPage($page);
+    }
+
+    public function update(String $url,Request $request, Page $page)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
+
+        $page->title = $request->title;
+        $page->save();
+
+        return redirect()->route('pages.show', [$url,$page]);
+    }
+
+    public function destroy(String $url,Page $page)
+    {
+        $page->delete();
+        return redirect()->route('pages.index',$url);
+    }
 }

@@ -1,10 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin') }}
+            {{ __('Viewing a page') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -23,7 +22,25 @@
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                             {{ __('gallery ') }}
                         </x-button>
-                    {{--  </form>--}}
+                     </form>
+                </div>
+                <div class="bg-white px-4 pb-5 flex items-center justify-end mt-4">
+
+                    <form method="get" action="{{ route('pages.edit', [$url, $page]) }}">
+                        <x-button class="ml-4">
+                            {{ __('Edit') }}
+                        </x-button>
+                    </form>
+
+                    <form method="post" action="{{ route('pages.destroy', [$url, $page]) }}">
+
+                        @csrf
+                        @method("DELETE")
+
+                        <x-button class="ml-4">
+                            {{ __('Delete') }}
+                        </x-button>
+                    </form>
                 </div>
                 <br>
             </div>

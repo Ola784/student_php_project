@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 @if($menus->isEmpty())
-                    <p class="p-6">No menus in database.</p>
+                    <p class="p-6">No menus for this page</p>
                 @else
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">

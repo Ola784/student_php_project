@@ -17,4 +17,4 @@ $I->click('Login');
 $I->seeCurrentUrlEquals('/dashboard');
 
 $I->see('John Doe');
-$I->see("You're logged in!");
+$I->see("You can manage your website by adding /admin after your URL");
