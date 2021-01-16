@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
+    <link
+        href="https://unpkg.com/tailwindcss/dist/tailwind.min.css"
+        rel="stylesheet"
+    />
 
     <style type="text/css">
     .gallery
@@ -70,18 +73,20 @@
             </div>
             <div class="col-md-2">
                 <br/>
-                <button type="submit" class="btn btn-success">Upload</button>
+                <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
+                    {{ __('Upload') }}
+                </x-button>
             </div>
         </div>
 
 
-    </form> 
+    </form>
 
 
     <div class="row">
     <div class='list-group gallery'>
 
-         
+
 
             @if($images->count())
 

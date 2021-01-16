@@ -40,7 +40,7 @@
                                     @csrf
                                     @method("DELETE")
 
-                                    <x-button class="ml-4">
+                                    <x-button class=" bg-red-500 hover:bg-red-700 ml-4">
                                         {{ __('Delete') }}
                                     </x-button>
                                 </form>

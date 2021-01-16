@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tailwind Starter Template - Minimal Blog: Tailwind Toolbox</title>
+    <title>{{$page->title}}</title>
     <meta name="author" content="name" />
     <meta name="description" content="description here" />
     <meta name="keywords" content="keywords,here" />
@@ -26,7 +26,7 @@
 
         <div class="pl-4">
             <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="#">
-                Minimal Blog
+         {{$page->title}}
             </a>
         </div>
 
@@ -69,7 +69,7 @@
 
         <!--Lead Para-->
         <p class="py-6">
-            👋 Welcome fellow <a class="text-green-500 no-underline hover:underline" href="https://www.tailwindcss.com">Tailwind CSS</a> and miminal monochrome blog fan. This starter template provides a starting point to create your own minimal monochrome blog using Tailwind CSS and vanilla Javascript.
+           <a class="text-green-500 no-underline hover:underline" href="https://www.tailwindcss.com">Tailwind CSS</a> and miminal monochrome blog fan. This starter template provides a starting point to create your own minimal monochrome blog using Tailwind CSS and vanilla Javascript.
         </p>
 
         <p class="py-6">The basic blog page layout is available and all using the default Tailwind CSS classes (although there are a few hardcoded style tags). If you are going to use this in your project, you will want to convert the classes into components.</p>
@@ -96,7 +96,7 @@
 
 
 
-        <!--/ Post Content-->
+
 
     </div>
 

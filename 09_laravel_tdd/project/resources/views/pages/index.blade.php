@@ -40,7 +40,7 @@
 
                 <div class="flex items-center justify-end mt-4 px-4 pb-5">
                     <form method="get" action="{{ route('pages.create', [$url]) }}">
-                        <x-button class="ml-4">
+                        <x-button class=" bg-red-500 hover:bg-red-700 ml-4">
                             {{ __('Create new...') }}
                         </x-button>
                     </form>

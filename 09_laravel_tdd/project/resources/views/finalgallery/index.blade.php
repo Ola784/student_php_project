@@ -34,7 +34,7 @@
 
 <div class="container">
 
-    <h3>FINAL GALLERY</h3>
+
 
     <div class="row">
     <div class='list-group gallery'>

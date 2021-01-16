@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
+use App\Models\Gallery;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
-        return view('website.index')->withMenus($menus);
+        $images = Gallery::get();
+        $pages=Page::all();
+        $page=$pages[0];
+        $menus=$page->menu()->get();
+        return view('website.index',compact('page','menus','images'));
     }
 }
