@@ -22,24 +22,24 @@ $pageID=$I->haveInDatabase('pages', [
     'title' => $pageTitle
 ]);
 
-$I->amOnPage('/'.$url.'/pages/'.$pageID);
+$I->amOnPage('/'.$url.'/admin/pages/'.$pageID);
 
 $I->click('menus');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus');
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus');
 $I->see('List of menus', 'h2');
 
 $I->see('No menus for this page');
 
 $I->click('Create new...');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/create');
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/create');
 
 $I->see('Creating a menu', 'h2');
 
 $I->click('Create');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/create');
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/create');
 
 $I->see('The title field is required.', 'li');
 
@@ -61,22 +61,22 @@ $menuID = $I->grabFromDatabase('menus', 'id', [
     'title' => $menuTitle
 ]);
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/'.$menuID);
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/'.$menuID);
 
 $I->see("Viewing a menu", 'h2');
 $I->see($menuTitle);
 
-$I->amOnPage('/'.$url.'/pages/'.$pageID.'/menus');
+$I->amOnPage('/'.$url.'/admin/pages/'.$pageID.'/menus');
 
 $I->see("$menuTitle", 'tr > td');
 
 $I->click('Details');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/'.$menuID);
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/'.$menuID);
 
 $I->click('Edit');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/'.$menuID.'/edit');
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/'.$menuID.'/edit');
 $I->see('Editing a menu', 'h2');
 
 $I->seeInField('title', $menuTitle);
@@ -85,7 +85,7 @@ $I->fillField('title', "");
 
 $I->click('Update');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/'.$menuID.'/edit');
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/'.$menuID.'/edit');
 $I->see('The title field is required.', 'li');
 
 $menuNewTitle = 'NewMenuTitle';
@@ -93,7 +93,7 @@ $menuNewTitle = 'NewMenuTitle';
 $I->fillField('title', $menuNewTitle);
 $I->click('Update');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus/'.$menuID);
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus/'.$menuID);
 
 $I->see($menuNewTitle);
 
@@ -107,7 +107,7 @@ $I->SeeInDatabase('menus', [
 
 $I->click('Delete');
 
-$I->seeCurrentUrlEquals('/'.$url.'/pages/'.$pageID.'/menus');
+$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID.'/menus');
 
 $I->dontSeeInDatabase('comments', [
     'title' => $menuNewTitle,
@@ -126,7 +126,7 @@ $I->haveInDatabase('menus', [
     'page_id'=>$pageID2
 ]);
 
-$I->amOnPage('/'.$url.'/pages/'.$pageID2);
+$I->amOnPage('/'.$url.'/admin/pages/'.$pageID2);
 
 $I->click('Delete');
 
