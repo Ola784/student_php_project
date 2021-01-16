@@ -7,18 +7,18 @@ use App\Models\Gallery;
 
 class GalleryController extends Controller
 {
-    public function create()
+    public function create(String $url)
     {
-        return view('gallery.create');
+        return view('gallery.create', ['url' => $url]);
     }
 
-    public function index()
+    public function index(String $url)
     {
         $images = Gallery::get();
-        return view('gallery.index', compact('images'));
+        return view('gallery.index', ['url' => $url], compact('images'));
     }
 
-    public function upload(Request $request)
+    public function upload(String $url, Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
@@ -36,7 +36,7 @@ class GalleryController extends Controller
     	return back()->with('success', 'Image uploaded successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(String $url, $id)
     {
         $image = Gallery::find($id);
         if ($image != NULL)

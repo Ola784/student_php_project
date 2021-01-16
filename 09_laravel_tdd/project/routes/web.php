@@ -26,30 +26,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Route::resource('/{url}/admin',App\Http\Controllers\PageController::class
-// )->middleware(['auth']);
 require __DIR__.'/auth.php';
 /*
 Route::resource('/menus',App\Http\Controllers\MenuController::class)->middleware('auth');
-
 Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class);*/
-
 //Route::resource('/pages', App\Http\Controllers\PageController::class);
 
-Route::resource('{url}.com/pages', App\Http\Controllers\PageController::class);
+
+//admin:
+Route::resource('{url}.com/admin/pages', App\Http\Controllers\PageController::class);
 Route::get('{url}.com/admin', [App\Http\Controllers\PageController::class, 'index']);
-Route::resource('{url}.com/pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
+Route::resource('{url}.com/admin/pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
+Route::get('{url}.com/admin/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+Route::post('{url}.com/admin/gallery', [GalleryController::class, 'upload'])->name('gallery.upload');
+Route::delete('{url}.com/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
-// Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-//     //Route::get('', [App\Http\Controllers\PageController::class, 'index']);
-    
-//     //Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
-
-//     Route::get('gallery', [GalleryController::class, 'index']);
-//     Route::post('gallery', [GalleryController::class, 'upload']);
-//     Route::delete('gallery/{id}', [GalleryController::class, 'destroy']);
-// });
-
-// // na finalnej stronie:
-// Route::get('gallery', [FinalGalleryController::class, 'index']);
+// finalna strona:
+Route::get('{url}.com/gallery', [FinalGalleryController::class, 'index']);

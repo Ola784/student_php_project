@@ -35,11 +35,9 @@
 <div class="container">
 
     <h3>ADMIN GALLERY</h3>
-    <form action="{{ url('admin/gallery') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
-
+    <form action="{{ route('gallery.upload', [$url]) }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
 
         {!! csrf_field() !!}
-
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -83,23 +81,26 @@
     <div class="row">
     <div class='list-group gallery'>
 
+         
 
             @if($images->count())
+
                 @foreach($images as $image)
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                    <a class="thumbnail fancybox" rel="ligthbox" href="/images/{{ $image->image }}">
-                        <img class="img-responsive" alt="" src="/images/{{ $image->image }}" />
-                        <div class='text-center'>
-                            <small class='text-muted'>{{ $image->title }}</small>
-                        </div> <!-- text-center / end -->
-                    </a>
-                    <form action="{{ url('admin/gallery',$image->id) }}" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    {!! csrf_field() !!}
-                    <button type="submit" class="close-icon btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
-                    </form>
-                </div> <!-- col-6 / end -->
+                    <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                        <a class="thumbnail fancybox" rel="ligthbox" href="/images/{{ $image->image }}">
+                            <img class="img-responsive" alt="" src="/images/{{ $image->image }}" />
+                            <div class='text-center'>
+                                <small class='text-muted'>{{ $image->title }}</small>
+                            </div> <!-- text-center / end -->
+                        </a>
+                        <form action="{{ route('gallery.destroy', [$url, $image->id]) }}" method="POST">
+                        <input type="hidden" name="_method" value="delete">
+                        {!! csrf_field() !!}
+                        <button type="submit" class="close-icon btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
+                        </form>
+                    </div> <!-- col-6 / end -->
                 @endforeach
+
             @endif
 
 

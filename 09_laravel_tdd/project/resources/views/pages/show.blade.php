@@ -13,12 +13,15 @@
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                             {{ __('menus') }}
                         </x-button>
-                        {{--  <form method="get" action="{{ route('post.create') }}">--}}
-                        <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
-                            {{ __('posts') }}
-                        </x-button>
-                        {{--   </form>--}}
-                        {{--   <form method="get" action="{{ route('gallery.create') }}">--}}
+                    </form>
+
+                    {{--  <form method="get" action="{{ route('post.create') }}">--}}
+                    <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
+                        {{ __('posts') }}
+                    </x-button>
+                    {{--   </form>--}}
+                    
+                    <form method="get" action="{{ route('gallery.index', [$url]) }}">
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                             {{ __('gallery ') }}
                         </x-button>
