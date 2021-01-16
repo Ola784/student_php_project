@@ -345,7 +345,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$okz4f55spLYoHgzk6DoYX.ZcQnMyU8aQlwgH1u5GMXeXpEc.DqkMm',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$Ea6v.5VvVljOPR2hkK6pK.8ZtUNGxa9g95GSCCTitKxK.LPtxV.9K',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-16 12:30:08
+-- Dump completed on 2021-01-16 14:18:08
