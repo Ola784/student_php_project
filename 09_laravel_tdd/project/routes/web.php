@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FinalGalleryController;
+use App\Http\Controllers\PageGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::resource('{url}.com/admin/pages.menus', App\Http\Controllers\PageMenuCont
 Route::get('{url}.com/admin/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 Route::post('{url}.com/admin/gallery', [GalleryController::class, 'upload'])->name('gallery.upload');
 Route::delete('{url}.com/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
+Route::resource('{url}.com/admin/pages.galleries', PageGalleryController::class, ['only' => ['index','create','store','show']]);
 
 // finalna strona:
 Route::get('{url}.com/gallery', [FinalGalleryController::class, 'index']);
