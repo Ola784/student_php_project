@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Page;
-use App\Models\Gallery;
+use App\Models\Galleries;
 
 class PageGalleryController extends Controller
 {
@@ -27,39 +27,39 @@ class PageGalleryController extends Controller
         return redirect()->route('pages.galleries.show', [$url, $page, $galleries]);
     }
 
-    public function show(String $url, Page $page, Gallery $gallery)
+    public function show(String $url, Page $page, Galleries $galleries)
     {
-        if($gallery->page_id != $page->id)
+        if($galleries->page_id != $page->id)
         {
             abort(404);
         }
         return view('pages.galleries.show', ['url' => $url], compact('page','galleries'));
     }
 
-    /* public function edit(String $url, Page $page, Menu $menu)
+    public function edit(String $url, Page $page, Galleries $galleries)
     {
-        if($menu->page_id!=$page->id)
+        if($galleries->page_id!=$page->id)
         {
             abort(404);
         }
-        return view('pages.menus.edit', ['url' => $url],compact('page','menu'));
+        return view('pages.galleries.edit', ['url' => $url],compact('page','galleries'));
     }
 
-    public function update(String $url, Request $request, Page $page, Menu $menu)
+    public function update(String $url, Request $request, Page $page, Galleries $galleries)
     {
-        $menu->update($this->validate($request, [
+        $galleries->update($this->validate($request, [
             'title' => 'required'
         ]));
-        return redirect()->route('pages.menus.show', [$url, $page,$menu]);
+        return redirect()->route('pages.galleries.show', [$url, $page,$galleries]);
     }
 
-    public function destroy(String $url, Page $page, Menu $menu)
+    public function destroy(String $url, Page $page, Galleries $galleries)
     {
-        if($menu->page_id!=$page->id)
+        if($galleries->page_id!=$page->id)
         {
             abort(404);
         }
-        $menu->delete();
-        return redirect()->route('pages.menus.index', [$url, $page]);
-    } */
+        $galleries->delete();
+        return redirect()->route('pages.galleries.index', [$url, $page]);
+    }
 }

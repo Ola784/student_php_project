@@ -20,7 +20,7 @@ class Page extends Model
         return $this->hasMany(Post::class);
     }
     public function galleries() {
-        return $this->hasMany(Gallery::class);
+        return $this->hasMany(Galleries::class);
     }
     use HasFactory;
 }

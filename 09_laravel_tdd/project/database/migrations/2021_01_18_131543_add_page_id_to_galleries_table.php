@@ -13,7 +13,7 @@ class AddPageIdToGalleriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('gallery', function (Blueprint $table) {
+        Schema::table('galleries', function (Blueprint $table) {
             $table->foreignId('page_id')->constrained()->onDelete('cascade');
         });
     }
@@ -25,7 +25,7 @@ class AddPageIdToGalleriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('gallery', function (Blueprint $table) {
+        Schema::table('galleries', function (Blueprint $table) {
             $table->dropForeign(['page_id']);
             $table->dropColumn('page_id');
         });
