@@ -20,11 +20,21 @@ class GalleryImageController extends Controller
         return view('pages.galleries.images.create', ['url' => $url], compact('page', 'gallery'));
     }
 
-    public function store(String $url, Page $page, Request $request)
+    public function store(String $url, Page $page, Gallery $gallery, Request $request)
     {
         $images = $gallery->images()->create($this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]));
+
+        $input['file'] = time().'.'.$request->file->getClientOriginalExtension();
+        $request->file->move(public_path('images'), $input['file']);
+
+
+        $input['title'] = $request->title;
+        $input['gallery_id'] = $gallery->id;
+        Image::create($input);
+
         return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $images]);
     }
 
@@ -36,9 +46,9 @@ class GalleryImageController extends Controller
         }
 
         // tu powinien byc widok na jeden image
-        $images = $gallery->images()->get();
+        //$images = $gallery->images()->get();
 
-        return view('pages.galleries.images.show', ['url' => $url], compact('page','gallery', 'images'));
+        return view('pages.galleries.images.show', ['url' => $url], compact('page','gallery', 'image'));
     }
 
     public function edit(String $url, Page $page, Gallery $gallery, Image $image)
@@ -53,7 +63,7 @@ class GalleryImageController extends Controller
     public function update(String $url, Request $request, Page $page, Gallery $gallery, Image $image)
     {
         $gallery->update($this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
         ]));
         return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $image]);
     }

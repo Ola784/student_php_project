@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('List of galleries') }}
+            {{ __('List of images') }}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                @if($galleries->isEmpty())
-                    <p class="p-6">No galleries for this page</p>
+                @if($images->isEmpty())
+                    <p class="p-6">No images for this page</p>
                 @else
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -25,13 +25,13 @@
                         </thead>
                         
                         <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($galleries as $gallery)
+                        @foreach($images as $image)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $gallery->title }}</div>
+                                    <div class="text-sm text-gray-900">{{ $image->title }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('pages.galleries.show', [$url, $page, $gallery]) }}" class="text-indigo-600 hover:text-indigo-900">Details</a>
+                                    <a href="{{ route('pages.galleries.images.show', [$url, $page, $gallery, $image]) }}" class="text-indigo-600 hover:text-indigo-900">Details</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -40,7 +40,7 @@
                 @endif
 
                 <div class="flex items-center justify-end mt-4 px-4 pb-5">
-                    <form method="get" action="{{ route('pages.galleries.create', [$url, $page]) }}">
+                    <form method="get" action="{{ route('pages.galleries.images.create', [$url, $page, $gallery]) }}">
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-4">
                             {{ __('Create new...') }}
                         </x-button>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Creating a gallery') }}
+            {{ __('Adding an image') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -11,14 +11,20 @@
 
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                    <form method="post" action="{{ route('pages.galleries.store', [$url, $page]) }}">
+                    <form method="post" action="{{ route('pages.galleries.images.store', [$url, $page, $gallery]) }}" enctype="multipart/form-data">
 
                         @csrf
 
-
+                        {{--TITLE--}}
                         <div class="mt-4">
                             <x-label for="title" :value="__('Title')" />
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
+                        </div>
+
+                        {{--FILE--}}
+                        <div class="col-md-5">
+                            <x-label for="file" :value="__('File')" />
+                            <x-input id="file" class="block mt-1 w-full" type="file" name="file" :value="old('file')" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

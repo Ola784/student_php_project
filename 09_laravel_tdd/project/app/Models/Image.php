@@ -16,5 +16,5 @@ class Image extends Model
 
     protected $table = 'images';
 
-    protected $fillable = ['title', 'image', 'gallery_id'];
+    protected $fillable = ['title', 'file', 'gallery_id'];
 }
