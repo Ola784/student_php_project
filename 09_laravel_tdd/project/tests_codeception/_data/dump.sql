@@ -373,7 +373,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$aFZAIQJlczdFIPZ9Yea7NedRud9IK7N1UxCgbghST9PP8v2LgJ4je',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$tmC902zH22faX3/71qrC5.ABA9yjFGkGP2NxRxwEAsmLLj7e9fLwq',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,8 +388,12 @@ CREATE TABLE `websites` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `url` bigint unsigned NOT NULL,
   `page_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `websites_user_id_foreign` (`user_id`),
+  CONSTRAINT `websites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -411,4 +415,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-18 13:33:53
+-- Dump completed on 2021-01-19  9:23:49

@@ -16,4 +16,5 @@ class WebsiteController extends Controller
         $menus=$page->menu()->get();
         return view('website.index',compact('page','menus','images'));
     }
+
 }
