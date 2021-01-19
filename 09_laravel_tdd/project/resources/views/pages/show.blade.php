@@ -21,9 +21,9 @@
                     </x-button>
                     {{--   </form>--}}
                     
-                    <form method="get" action="{{ route('gallery.index', [$url]) }}">
+                    <form method="get" action="{{ route('pages.galleries.index', [$url, $page]) }}">
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
-                            {{ __('gallery ') }}
+                            {{ __('galleries ') }}
                         </x-button>
                      </form>
                 </div>

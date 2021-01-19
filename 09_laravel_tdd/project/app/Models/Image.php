@@ -9,9 +9,9 @@ class Image extends Model
 {
     use HasFactory;
 
-    public function page()
+    public function gallery()
     {
-        return $this->belongsTo(Page::class);
+        return $this->belongsTo(Gallery::class);
     }
 
     protected $table = 'images';

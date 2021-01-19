@@ -33,7 +33,10 @@ class PageGalleryController extends Controller
         {
             abort(404);
         }
-        return view('pages.galleries.show', ['url' => $url], compact('page','gallery'));
+        $images = $gallery->images()->get();
+
+        //redirect?
+        return view('pages.galleries.show', ['url' => $url], compact('page','gallery', 'images'));
     }
 
     public function edit(String $url, Page $page, Gallery $gallery)
@@ -61,5 +64,14 @@ class PageGalleryController extends Controller
         }
         $gallery->delete();
         return redirect()->route('pages.galleries.index', [$url, $page]);
+    }
+
+    public function add_image(String $url, Page $page, Gallery $gallery)
+    {
+        if($gallery->page_id != $page->id)
+        {
+            abort(404);
+        }
+        return view('pages.galleries.images.create', ['url' => $url], compact('page'));
     }
 }

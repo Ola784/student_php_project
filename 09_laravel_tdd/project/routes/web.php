@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FinalGalleryController;
 use App\Http\Controllers\PageGalleryController;
+use App\Http\Controllers\GalleryImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,11 +40,13 @@ Route::resource('{url}.com/admin/pages', App\Http\Controllers\PageController::cl
 Route::get('{url}.com/admin', [App\Http\Controllers\PageController::class, 'index']);
 Route::resource('{url}.com/admin/pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
-Route::get('{url}.com/admin/gallery', [GalleryController::class, 'index'])->name('gallery.index');
-Route::post('{url}.com/admin/gallery', [GalleryController::class, 'upload'])->name('gallery.upload');
-Route::delete('{url}.com/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+Route::resource('{url}.com/admin/pages.galleries', PageGalleryController::class);
+Route::resource('{url}.com/admin/pages.galleries.images', GalleryImageController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
-Route::resource('{url}.com/admin/pages.galleries', PageGalleryController::class, ['only' => ['index','create','store','show']]);
+//Route::get('{url}.com/admin/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+//Route::post('{url}.com/admin/gallery', [GalleryController::class, 'upload'])->name('gallery.upload');
+//Route::delete('{url}.com/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
 
 // finalna strona:
-Route::get('{url}.com/gallery', [FinalGalleryController::class, 'index']);
+//Route::get('{url}.com/gallery', [FinalGalleryController::class, 'index']);
