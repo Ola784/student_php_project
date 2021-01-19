@@ -7,14 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
-    use HasFactory;
-
-    public function page()
-    {
+    public function page() {
         return $this->belongsTo(Page::class);
     }
-
-    protected $table = 'gallery';
-
-    protected $fillable = ['title', 'image'];
+    protected $fillable = [
+       'title'
+    ];
+    use HasFactory;
 }

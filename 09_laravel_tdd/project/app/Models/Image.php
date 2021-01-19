@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Galleries extends Model
+class Image extends Model
 {
-    public function page() {
+    use HasFactory;
+
+    public function page()
+    {
         return $this->belongsTo(Page::class);
     }
-    protected $fillable = [
-       'title'
-    ];
-    use HasFactory;
+
+    protected $table = 'images';
+
+    protected $fillable = ['title', 'image', 'gallery_id'];
 }

@@ -19,8 +19,8 @@ class Page extends Model
     public function post() {
         return $this->hasMany(Post::class);
     }
-    public function galleries() {
-        return $this->hasMany(Galleries::class);
+    public function gallery() {
+        return $this->hasMany(Gallery::class);
     }
     use HasFactory;
 }
