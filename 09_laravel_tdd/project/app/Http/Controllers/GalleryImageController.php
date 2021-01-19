@@ -22,20 +22,23 @@ class GalleryImageController extends Controller
 
     public function store(String $url, Page $page, Gallery $gallery, Request $request)
     {
-        $images = $gallery->images()->create($this->validate($request, [
+        $this->validate($request, [
             'title' => 'required',
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]));
+        ]);
 
-        $input['file'] = time().'.'.$request->file->getClientOriginalExtension();
-        $request->file->move(public_path('images'), $input['file']);
-
+        $file = time().'.'.$request->file->getClientOriginalExtension();
 
         $input['title'] = $request->title;
-        $input['gallery_id'] = $gallery->id;
-        Image::create($input);
 
-        return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $images]);
+        $input['file'] = $file;
+        $request->file->move(public_path('images'), $input['file']);
+
+        $image = $gallery->images()->create($input);
+        //$input['gallery_id'] = $gallery->id;
+        //Image::create($input);
+
+        return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $image]);
     }
 
     public function show(String $url, Page $page, Gallery $gallery, Image $image)
@@ -48,6 +51,7 @@ class GalleryImageController extends Controller
         // tu powinien byc widok na jeden image
         //$images = $gallery->images()->get();
 
+        error_log('Some message here.');
         return view('pages.galleries.images.show', ['url' => $url], compact('page','gallery', 'image'));
     }
 
