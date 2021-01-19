@@ -19,28 +19,35 @@
                     </div>
                     <div class="border-t border-gray-200">
                         <dl>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt class="text-sm font-medium text-gray-500">
-                                    Title
-                                </dt>
-                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    {{ $gallery->title }}
-                                </dd>
-                            </div>
+                            {{--TABELA--}}
+                            <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Title
+                                    </th>
+                                    <th scope="col"
+                                        class="relative px-6 py-3">
+                                        <span class="sr-only">Details</span>
+                                    </th>
+                                </tr>
+                            </thead>
 
-                            {{--IMAGES--}}
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($images as $image)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ $image->title }}</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="{{ route('pages.galleries.show', [$url, $page, $gallery]) }}" class="text-indigo-600 hover:text-indigo-900">Details</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                                {{--IMAGES--}}
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($images as $image)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">{{ $image->title }}</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <a href="{{ route('pages.galleries.images.show', [$url, $page, $gallery, $image]) }}" class="text-indigo-600 hover:text-indigo-900">Details</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
                             <div class="bg-white px-4 pb-5 flex items-center justify-end mt-4">
 

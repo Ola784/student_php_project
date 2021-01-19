@@ -4,6 +4,13 @@
             {{ __('Viewing an image') }}
         </h2>
     </x-slot>
+
+    <form method="get" action="{{ route('pages.galleries.show', [$url, $page, $gallery]) }}">
+        <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
+            {{ __('go back ') }}
+        </x-button>
+    </form>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

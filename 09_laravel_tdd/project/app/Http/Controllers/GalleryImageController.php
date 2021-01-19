@@ -27,7 +27,7 @@ class GalleryImageController extends Controller
             'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $file = time().'.'.$request->file->getClientOriginalExtension();
+        $file = $url.time().'.'.$request->file->getClientOriginalExtension();
 
         $input['title'] = $request->title;
 
@@ -61,12 +61,12 @@ class GalleryImageController extends Controller
         {
             abort(404);
         }
-        return view('pages.galleries.images.edit', ['url' => $url],compact('page','gallery','image'));
+        return view('pages.galleries.images.edit', ['url' => $url], compact('page','gallery','image'));
     }
 
     public function update(String $url, Request $request, Page $page, Gallery $gallery, Image $image)
     {
-        $gallery->update($this->validate($request, [
+        $image->update($this->validate($request, [
             'title' => 'required',
         ]));
         return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $image]);
