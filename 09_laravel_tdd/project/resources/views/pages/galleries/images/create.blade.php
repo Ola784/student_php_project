@@ -27,6 +27,12 @@
                             <x-input id="file" class="block mt-1 w-full" type="file" name="file" :value="old('file')" />
                         </div>
 
+                        {{--DESCRIPTION--}}
+                        <div class="mt-4">
+                            <x-label for="description" :value="__('Description')" />
+                            <x-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
 
                             <x-button class=" bg-red-500 hover:bg-red-700 ml-4">

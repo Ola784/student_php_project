@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Gallery;
 use App\Models\Image;
+use Illuminate\Support\Facades\File;
 
 class GalleryImageController extends Controller
 {
@@ -34,9 +35,9 @@ class GalleryImageController extends Controller
         $input['file'] = $file;
         $request->file->move(public_path('images'), $input['file']);
 
+        $input['description'] = $request->description;
+
         $image = $gallery->images()->create($input);
-        //$input['gallery_id'] = $gallery->id;
-        //Image::create($input);
 
         return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $image]);
     }
@@ -66,9 +67,16 @@ class GalleryImageController extends Controller
 
     public function update(String $url, Request $request, Page $page, Gallery $gallery, Image $image)
     {
-        $image->update($this->validate($request, [
+        $this->validate($request, [
             'title' => 'required',
-        ]));
+            'description' => 'nullable',
+        ]);
+
+        $input['title'] = $request->title;
+        $input['description'] = $request->description;
+
+        $image->update($input);
+
         return redirect()->route('pages.galleries.images.show', [$url, $page, $gallery, $image]);
     }
 
@@ -78,7 +86,8 @@ class GalleryImageController extends Controller
         {
             abort(404);
         }
+        File::delete(public_path() . '/images/' . $image->file);
         $image->delete();
-        return redirect()->route('pages.galleries.images.index', [$url, $page, $gallery]);
+        return redirect()->route('pages.galleries.show', [$url, $page, $gallery]);
     }
 }

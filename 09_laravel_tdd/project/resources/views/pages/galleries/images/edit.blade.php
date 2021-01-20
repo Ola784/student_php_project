@@ -16,10 +16,16 @@
                         @csrf
                         @method("PUT")
 
-
+                        {{--TITLE--}}
                         <div class="mt-4">
                             <x-label for="title" :value="__('Title')" />
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="$image->title" />
+                        </div>
+
+                        {{--DESCRIPTION--}}
+                        <div class="mt-4">
+                            <x-label for="description" :value="__('Description')" />
+                            <x-input id="description" class="block mt-1 w-full" type="text" name="description" :value="$image->description" />
                         </div>
 
 
