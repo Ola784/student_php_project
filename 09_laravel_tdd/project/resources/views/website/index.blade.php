@@ -162,6 +162,14 @@
 </div>
 <!--/container-->
 
+{{--contact--}}
+<form method="get" action="/contact">
+
+    <x-button class="ml-4">
+        {{ __('contact') }}
+    </x-button>
+</form>
+
 <footer class="bg-white border-t border-gray-400 shadow">
     <div class="container max-w-4xl mx-auto flex py-8">
 

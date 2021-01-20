@@ -43,6 +43,10 @@ Route::resource('{url}.com/admin/pages.menus', App\Http\Controllers\PageMenuCont
 Route::resource('{url}.com/admin/pages.galleries', PageGalleryController::class);
 Route::resource('{url}.com/admin/pages.galleries.images', GalleryImageController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
+
+Route::get('/contact', [App\Http\Controllers\EmailController::class, 'index']);
+Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'send']);
+
 //Route::get('{url}.com/admin/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 //Route::post('{url}.com/admin/gallery', [GalleryController::class, 'upload'])->name('gallery.upload');
 //Route::delete('{url}.com/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');

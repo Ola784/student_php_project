@@ -102,6 +102,35 @@ LOCK TABLES `comments` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `contacts`
+--
+
+DROP TABLE IF EXISTS `contacts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contacts` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contacts`
+--
+
+LOCK TABLES `contacts` WRITE;
+/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -159,29 +188,32 @@ LOCK TABLES `galleries` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `gallery`
+-- Table structure for table `images`
 --
 
-DROP TABLE IF EXISTS `gallery`;
+DROP TABLE IF EXISTS `images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `gallery` (
+CREATE TABLE `images` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `gallery_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `images_gallery_id_foreign` (`gallery_id`),
+  CONSTRAINT `images_gallery_id_foreign` FOREIGN KEY (`gallery_id`) REFERENCES `galleries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `gallery`
+-- Dumping data for table `images`
 --
 
-LOCK TABLES `gallery` WRITE;
-/*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
-/*!40000 ALTER TABLE `gallery` ENABLE KEYS */;
+LOCK TABLES `images` WRITE;
+/*!40000 ALTER TABLE `images` DISABLE KEYS */;
+/*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -224,7 +256,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +265,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_13_192136_create_gallery_table',1),(12,'2021_01_14_113503_create_categories_table',1),(13,'2021_01_14_113608_create_posts_table',1),(14,'2021_01_14_113633_create_category_posts_table',1),(15,'2021_01_18_131327_create_galleries_table',1),(16,'2021_01_18_131543_add_page_id_to_galleries_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_14_113633_create_category_posts_table',1),(14,'2021_01_18_131327_create_galleries_table',1),(15,'2021_01_18_131543_add_page_id_to_galleries_table',1),(16,'2021_01_19_201735_create_images_table',1),(17,'2021_01_19_201802_add_gallery_id_to_images_table',1),(18,'2021_01_20_115021_create_contacts_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,7 +405,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$kX7dVt68nFKntgl/DBl8WeeQ2iBTyxm66IWhKQ/S9SECnGl9ooShW',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$izT92mQlmS6Y9saTCBXwveC87rsTYM5qg4ijx0hZyGCW0MgH5ovOq',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-19 20:01:50
+-- Dump completed on 2021-01-20 13:21:28
