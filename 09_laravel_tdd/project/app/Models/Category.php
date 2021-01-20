@@ -9,7 +9,11 @@ class Category extends Model
 {
     protected $fillable = ['thumbnail', 'name', 'slug', 'is_published'];
 
-    public function post() {
+    public function page() {
+        return $this->belongsTo(Page::class, 'category_posts');
+    }
+
+    public function posts() {
         return $this->belongsToMany(Post::class, 'category_posts');
     }
     use HasFactory;

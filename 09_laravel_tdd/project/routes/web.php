@@ -54,3 +54,7 @@ Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'se
 
 // finalna strona:
 //Route::get('{url}.com/gallery', [FinalGalleryController::class, 'index']);
+
+Route::resource('category','CategoryController');
+Route::resource('post','PostController');
+Route::get('{url}.com/admin/post', [PostController::class, 'create'])->name('post.create');

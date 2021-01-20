@@ -8,53 +8,37 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(String $url)
     {
-        $posts = Post::get
+        $posts = Post::latest()->approved()->published()->paginate(6);
+        return view('posts.index', ['url' => $url]);
     }
 
-    public function create()
+    public function create(String $url)
     {
-        return view('post.create');
+        return view('posts.create', ['url' => $url]);
     }
 
-    public function store(Request $request)
+    public function details($slug)
     {
-        //
+        $post = Post::where('slug',$slug)->approved()->published()->first();
+
+        $blogKey = 'blog_' . $post->id;
+
+        if (!Session::has($blogKey)) {
+            $post->increment('view_count');
+            Session::put($blogKey,1);
+        }
+        $randomposts = Post::approved()->published()->take(3)->inRandomOrder()->get();
+        return view('post',compact('post','randomposts'));
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
+    public function postByCategory($slug)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
+        $category = Category::where('slug',$slug)->first();
+        $posts = $category->posts()->approved()->published()->get();
+        return view('category',compact('category','posts'));
     }
 
     /**

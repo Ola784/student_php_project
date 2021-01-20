@@ -15,10 +15,9 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('thumbnail')->nullable();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->enum('is_published', ['1','0']);
+            $table->string('image')->default('default.png');
             $table->timestamps();
         });
     }
