@@ -49,11 +49,7 @@ class GalleryImageController extends Controller
             abort(404);
         }
 
-        // tu powinien byc widok na jeden image
-        //$images = $gallery->images()->get();
-
-        error_log('Some message here.');
-        return view('pages.galleries.images.show', ['url' => $url], compact('page','gallery', 'image'));
+        return view('pages.galleries.images.show', ['url' => $url], compact('page', 'gallery', 'image'));
     }
 
     public function edit(String $url, Page $page, Gallery $gallery, Image $image)

@@ -9,6 +9,7 @@ use App\Http\Controllers\GalleryImageController;
 
 use App\Http\Controllers\FinalPageController;
 use App\Http\Controllers\FinalPageGalleryController;
+use App\Http\Controllers\FinalGalleryImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,10 @@ Route::resource('{url}.com/pages', FinalPageController::class, ['only' => ['inde
 Route::resource('{url}.com/pages.galleries', FinalPageGalleryController::class, ['only' => ['show']])->names([
     'show' => 'final.pages.galleries.show'
 ]);
+Route::resource('{url}.com/pages.galleries.images', FinalGalleryImageController::class, ['only' => ['show']])->names([
+    'show' => 'final.pages.galleries.images.show'
+]);
+
 
 //
 Route::resource('category','CategoryController');
