@@ -7,6 +7,9 @@ use App\Http\Controllers\FinalGalleryController;
 use App\Http\Controllers\PageGalleryController;
 use App\Http\Controllers\GalleryImageController;
 
+use App\Http\Controllers\FinalPageController;
+use App\Http\Controllers\FinalPageGalleryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +38,7 @@ Route::resource('pages.menus', App\Http\Controllers\PageMenuController::class);*
 //Route::resource('/pages', App\Http\Controllers\PageController::class);
 
 
-//admin:
+// admin:
 Route::resource('{url}.com/admin/pages', App\Http\Controllers\PageController::class);
 Route::get('{url}.com/admin', [App\Http\Controllers\PageController::class, 'index']);
 Route::resource('{url}.com/admin/pages.menus', App\Http\Controllers\PageMenuController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
@@ -47,14 +50,16 @@ Route::resource('{url}.com/admin/pages.galleries.images', GalleryImageController
 Route::get('/contact', [App\Http\Controllers\EmailController::class, 'index']);
 Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'send']);
 
-//Route::get('{url}.com/admin/gallery', [GalleryController::class, 'index'])->name('gallery.index');
-//Route::post('{url}.com/admin/gallery', [GalleryController::class, 'upload'])->name('gallery.upload');
-//Route::delete('{url}.com/admin/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
-
-
 // finalna strona:
-//Route::get('{url}.com/gallery', [FinalGalleryController::class, 'index']);
+Route::resource('{url}.com/pages', FinalPageController::class, ['only' => ['index','show']])->names([
+    'index' => 'final.pages',
+    'show' => 'final.pages.show'
+]);
+Route::resource('{url}.com/pages.galleries', FinalPageGalleryController::class, ['only' => ['show']])->names([
+    'show' => 'final.pages.galleries.show'
+]);
 
+//
 Route::resource('category','CategoryController');
 Route::resource('post','PostController');
 Route::get('{url}.com/admin/post', [PostController::class, 'create'])->name('post.create');

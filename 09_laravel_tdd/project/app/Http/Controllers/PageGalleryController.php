@@ -21,10 +21,10 @@ class PageGalleryController extends Controller
 
     public function store(String $url, Page $page, Request $request)
     {
-        $galleries = $page->gallery()->create($this->validate($request, [
+        $gallery = $page->gallery()->create($this->validate($request, [
             'title' => 'required'
         ]));
-        return redirect()->route('pages.galleries.show', [$url, $page, $galleries]);
+        return redirect()->route('pages.galleries.show', [$url, $page, $gallery]);
     }
 
     public function show(String $url, Page $page, Gallery $gallery)
@@ -36,7 +36,7 @@ class PageGalleryController extends Controller
         $images = $gallery->images()->get();
 
         //redirect?
-        return view('pages.galleries.show', ['url' => $url], compact('page','gallery', 'images'));
+        return view('pages.galleries.show', ['url' => $url], compact('page', 'gallery', 'images'));
     }
 
     public function edit(String $url, Page $page, Gallery $gallery)
