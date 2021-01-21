@@ -25,7 +25,7 @@ class EmailController extends Controller
             'message' => $request->message
         );
 
-        Mail::to('Receiver Email Address')->send(new sendingEmail($data));
+        Mail::to('laravelprojekt@gmail.com')->send(new sendingEmail($data));
         return back()->with('success', 'Thanks for contacting us!');
     }
 
