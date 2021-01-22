@@ -13,6 +13,7 @@
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
                             {{ $page->title }}
                         </h3>
+                        {{$page->content}}
                         <p class="mt-1 max-w-2xl text-sm text-gray-500">
                             Galleries.
                         </p>

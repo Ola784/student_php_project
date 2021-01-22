@@ -19,6 +19,10 @@
                         <div class="mt-4">
                             <x-label for="title" :value="__('Title')" />
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
+                            <x-label for="cnt" :value="__('Content HTML')" />
+                            <x-input id="cnt"  class="block mt-6 w-full h-60" type="text" name="cnt" :value="old('content')" />
+                            <x-label for="cnt2" :value="__('Content MARKDOWN')" />
+                            <x-input id="cnt2" class="block mt-6 w-full h-60" type="text" name="cnt2" :value="old('content_markdown')" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

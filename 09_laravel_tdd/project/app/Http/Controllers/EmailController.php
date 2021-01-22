@@ -22,6 +22,7 @@ class EmailController extends Controller
 
         $data = array(
             'name' => $request->name,
+            'email'=>$request->email,
             'message' => $request->message
         );
 

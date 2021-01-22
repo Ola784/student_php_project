@@ -2,3 +2,4 @@
 <p>My query is about the following topic:</p>
 <p>{{ $emails['message'] }}.</p>
 <p>It will be helpful if you give me response soon.Thank you.</p>
+<p>Mail:<b>{{$emails['email']}}</b></p>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\HtmlString;
+use Parsedown;
 
 class PageController extends Controller
 {
@@ -32,7 +34,10 @@ class PageController extends Controller
 
         $page = new Page();
         $page->title = $request->title;
+        $page->content=$request->cnt;
+        $page->content_markdown=new HtmlString(app(Parsedown::class)->text($request->cnt2));
         $page->save();
+
 
         return redirect()->route('pages.show', [$url, $page]);
     }
@@ -49,6 +54,8 @@ class PageController extends Controller
         ]);
 
         $page->title = $request->title;
+        $page->content=$request->cnt;
+        $page->content_markdown=new HtmlString(app(Parsedown::class)->text($request->cnt2));
         $page->save();
 
         return redirect()->route('pages.show', [$url,$page]);
