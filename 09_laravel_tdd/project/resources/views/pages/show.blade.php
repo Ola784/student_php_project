@@ -15,12 +15,13 @@
                         </x-button>
                     </form>
 
-                    {{--  <form method="get" action="{{ route('post.create') }}">--}}
-                    <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
+                    <form method="get" action="{{ route('pages.posts.create', [$url, $page]) }}">
+                        <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                         {{ __('posts') }}
-                    </x-button>
+                        </x-button>
+                    </form>
                     {{--   </form>--}}
-                    
+
                     <form method="get" action="{{ route('pages.galleries.index', [$url, $page]) }}">
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                             {{ __('galleries ') }}

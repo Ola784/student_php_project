@@ -1,18 +1,14 @@
-@extends('layouts.app')
 
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Creating a menu') }}
+                {{ __('Creating a post') }}
             </h2>
         </x-slot>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Add new article</div>
-
-                    <div class="card-body">
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -27,40 +23,36 @@
                             <form method="post" action="{{ route('pages.posts.store', [$url, $page]) }}">
                             @csrf
 
-                            Article title*:
-                            <input type="text" name="title" class="form-control" value="{{ old('title') }}" />
+                            <div class="mt-4">
+                                <x-label for="title" class="block mt-2 w-50" :value="__('Post Title')" />
+                                <x-input id="title" name="title" class="block mt-1 w-full" type="text" value="{{ old('title') }}" />
                             <br />
 
-                            Article text*:
-                            <textarea name="body" class="form-control" rows="10">{{ old('body') }}</textarea>
+                                <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
+                                <x-input id="body"  class="block mt-6 w-full h-60" type="text" name="body" :value="old('body')" />
                             <br />
 
-                            Categories:
-                            <br />
-                            @foreach ($categories as $cat)
-                                <input type="checkbox" name="categories[]" value="{{ $cat->id }}" /> {{ $cat->name }}
-                                <br />
-                            @endforeach
-                            <br />
 
-                            Tags (comma-separated):
-                            <input type="text" name="tags" class="form-control" />
-                            <br />
 
-                            Main image:
+                                <x-label for="title" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
+                                <x-input id="tags" name="tags" class="block mt-1 w-full" value="{{ old('tags') }}" />
                             <br />
+                                <x-label for="image" class="block mt-3 w-50" :value="__('Main image:')" />
+
                             <input type="file" name="main_image" />
                             <br /><br />
-
-                            <input type="submit" value=" Save article " class="btn btn-primary" />
-
-                        </form>
+                            <div class="py-7" style="display:flex; justify-content:right">
+                                <x-button class=" bg-red-500 hover:bg-red-700 ml-1">
+                                    {{ __('Create post') }}
+                                </x-button>
+                            </div>
+                            </div>
+                            </form>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
 
 
