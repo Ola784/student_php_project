@@ -1,9 +1,26 @@
 
+
+
+
     <x-app-layout>
+
+        @section('stylesheet')
+            <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+            <script>
+                tinymce.init({
+                    selector: 'textarea',
+                    plugins: 'link code',
+                    menubar: false
+                });
+            </script>
+
+        @endsection
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Creating a post') }}
             </h2>
+
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -29,17 +46,15 @@
                             <br />
 
                                 <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
-                                <x-input id="body"  class="block mt-6 w-full h-60" type="text" name="body" :value="old('body')" />
+                                <textarea name="body" class="block mt-1 h-80 w-full"></textarea>
                             <br />
 
-
-
-                                <x-label for="title" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
-                                <x-input id="tags" name="tags" class="block mt-1 w-full" value="{{ old('tags') }}" />
+                                <x-label for="tag_id" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
+                                <x-input id="tag_id" name="tag_id" class="block mt-2 w-full" type="text" value="{{ old('tags') }}" />
                             <br />
-                                <x-label for="image" class="block mt-3 w-50" :value="__('Main image:')" />
+                                <x-label for="image" class="block mt-1 w-50" :value="__('Main image:')" />
 
-                            <input type="file" name="main_image" />
+                            <input type="file" name="image" />
                             <br /><br />
                             <div class="py-7" style="display:flex; justify-content:right">
                                 <x-button class=" bg-red-500 hover:bg-red-700 ml-1">

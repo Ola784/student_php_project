@@ -13,10 +13,8 @@ class AddPostIdToCategories extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            //$table->foreignId('post_id')->default('1')->constrained()->onDelete('cascade');
-            $table->bigInteger('post_id')->unsigned()->nullable();
-            $table->foreign('post_id')->references('id')->on('posts');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->integer('category_id')->nullable()->unsigned();
         });
     }
 
@@ -27,8 +25,8 @@ class AddPostIdToCategories extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            //
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('category_id');
         });
     }
 }

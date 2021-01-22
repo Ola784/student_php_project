@@ -22,7 +22,8 @@ class PagePostController extends Controller
     public function store(String $url, Page $page,Request $request )
     {
         $posts=$page->post()->create($this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'body' => 'required'
         ]));
         return redirect()->route('pages.posts.show', [$url, $page, $posts]);
     }
@@ -46,7 +47,8 @@ class PagePostController extends Controller
     public function update(String $url, Request $request, Page $page, Post $post)
     {
         $post->update($this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'body' => 'required'
         ]));
         return redirect()->route('pages.posts.show', [$url, $page, $post]);
     }

@@ -13,8 +13,8 @@ class AddPostIdToTags extends Migration
      */
     public function up()
     {
-        Schema::table('tags', function (Blueprint $table) {
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreignId('tag_id')->nullable()->unsigned();
         });
     }
 
