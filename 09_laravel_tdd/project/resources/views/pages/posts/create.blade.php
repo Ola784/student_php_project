@@ -4,18 +4,11 @@
 
     <x-app-layout>
 
-        @section('stylesheet')
-            <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    @section('scripts')
+            <script src="{{"https://cdn.tiny.cloud/1/ug2urxtldpl5qrxe9twuocjt351ia7q8mf9nibgmt5npql0d/tinymce/5/tinymce.min.js"}}"></script>
+            <script>tinymce.init({selector:'textarea'});</script>
+        @show
 
-            <script>
-                tinymce.init({
-                    selector: 'textarea',
-                    plugins: 'link code',
-                    menubar: false
-                });
-            </script>
-
-        @endsection
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Creating a post') }}
@@ -46,7 +39,7 @@
                             <br />
 
                                 <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
-                                <textarea name="body" class="block mt-1 h-80 w-full"></textarea>
+                                <textarea name="body" class="block mt-10 h-80 w-full"></textarea>
                             <br />
 
                                 <x-label for="tag_id" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
