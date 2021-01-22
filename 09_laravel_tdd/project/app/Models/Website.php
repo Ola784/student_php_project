@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Website extends Model
 {
-    public function pages(){
+    public function pages() {
         return $this->hasMany(Page::class);
     }
     public function users() {

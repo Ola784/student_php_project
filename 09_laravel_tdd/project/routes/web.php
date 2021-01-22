@@ -8,6 +8,7 @@ use App\Http\Controllers\FinalGalleryController;
 use App\Http\Controllers\PageGalleryController;
 use App\Http\Controllers\GalleryImageController;
 
+use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\FinalPageController;
 use App\Http\Controllers\FinalPageGalleryController;
 use App\Http\Controllers\FinalGalleryImageController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\FinalGalleryImageController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@index')->name('index');
+
 Route::resource('/comments', App\Http\Controllers\CommentController::class);
 
 Route::get('/dashboard', function () {
@@ -55,10 +56,12 @@ Route::get('/contact', [App\Http\Controllers\EmailController::class, 'index']);
 Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'send']);
 
 // finalna strona:
-Route::resource('{url}.com/pages', FinalPageController::class, ['only' => ['index','show']])->names([
-    'index' => 'final.pages',
-    'show' => 'final.pages.show'
-]);
+Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@index')->name('index');
+Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@show')->name('show');
+// Route::resource('/{url}.com', WebsiteController::class, ['only' => ['index','show']])->names([
+//     'index' => 'website',
+//     'show' => 'website.show'
+// ]);
 Route::resource('{url}.com/pages.galleries', FinalPageGalleryController::class, ['only' => ['show']])->names([
     'show' => 'final.pages.galleries.show'
 ]);
