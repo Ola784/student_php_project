@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['thumbnail', 'name', 'slug', 'is_published'];
+    protected $fillable = ['name'];
 
     public function page() {
         return $this->belongsTo(Page::class, 'category_posts');
@@ -16,5 +16,6 @@ class Category extends Model
     public function posts() {
         return $this->belongsToMany(Post::class, 'category_posts');
     }
+
     use HasFactory;
 }

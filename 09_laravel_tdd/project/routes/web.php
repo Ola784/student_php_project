@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GalleryController;
@@ -47,6 +48,8 @@ Route::resource('{url}.com/admin/pages.menus', App\Http\Controllers\PageMenuCont
 Route::resource('{url}.com/admin/pages.galleries', PageGalleryController::class);
 Route::resource('{url}.com/admin/pages.galleries.images', GalleryImageController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
 
+Route::resource('{url}.com/admin/pages.posts', App\Http\Controllers\PagePostController::class,['only' => ['index','create','store','show','edit','destroy','update']]);
+
 
 Route::get('/contact', [App\Http\Controllers\EmailController::class, 'index']);
 Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'send']);
@@ -64,7 +67,4 @@ Route::resource('{url}.com/pages.galleries.images', FinalGalleryImageController:
 ]);
 
 
-//
-Route::resource('category','CategoryController');
-Route::resource('post','PostController');
-Route::get('{url}.com/admin/post', [PostController::class, 'create'])->name('post.create');
+

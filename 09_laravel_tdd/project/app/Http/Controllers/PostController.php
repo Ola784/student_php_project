@@ -3,52 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
 
-    public function index(String $url)
+    public function index(String $url, Page $page)
     {
-        $posts = Post::latest()->approved()->published()->paginate(6);
-        return view('posts.index', ['url' => $url]);
+        $posts = $page->post()->get();
+        return view('pages.posts.index', ['url' => $url], compact('page', 'posts'));
     }
 
-    public function create(String $url)
+    public function create(String $url, Page $page)
     {
-        return view('posts.create', ['url' => $url]);
+        return view('pages.posts.create', ['url' => $url], compact('page'));
     }
 
-    public function details($slug)
+    public function store(String $url, Page $page, Request $request)
     {
-        $post = Post::where('slug',$slug)->approved()->published()->first();
+        $post = $page->post()->create($this->validate($request, [
+            'title' => 'required'
+        ]));
+        return redirect()->route('pages.posts.show', [$url, $page, $post]);
+    }
 
-        $blogKey = 'blog_' . $post->id;
-
-        if (!Session::has($blogKey)) {
-            $post->increment('view_count');
-            Session::put($blogKey,1);
+    public function show(String $url, Page $page, Post $post)
+    {
+        if($post->page_id != $page->id) {
+            abort(404);
         }
-        $randomposts = Post::approved()->published()->take(3)->inRandomOrder()->get();
-        return view('post',compact('post','randomposts'));
 
+        return view('pages.posts.show', ['url' => $url], compact('page','post'));
     }
 
-    public function postByCategory($slug)
+    public function update(String $url, Request $request, Page $page, Post $post)
     {
-        $category = Category::where('slug',$slug)->first();
-        $posts = $category->posts()->approved()->published()->get();
-        return view('category',compact('category','posts'));
+        $post->update($this->validate($request, [
+            'title' => 'required'
+        ]));
+        return redirect()->route('pages.posts.show', [$url, $page, $post]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
+    public function destroy(String $url, Page $page, Post $post)
     {
-        //
+        if($post->page_id!=$page->id) {
+            abort(404);
+        }
+        $post->delete();
+        return redirect()->route('pages.post.index', [$url, $page]);
     }
 }

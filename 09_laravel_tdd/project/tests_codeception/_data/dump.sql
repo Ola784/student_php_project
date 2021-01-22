@@ -23,16 +23,15 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `post_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `categories_name_unique` (`name`),
-  UNIQUE KEY `categories_slug_unique` (`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `categories_post_id_foreign` (`post_id`),
+  CONSTRAINT `categories_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,36 +41,6 @@ CREATE TABLE `categories` (
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `category_posts`
---
-
-DROP TABLE IF EXISTS `category_posts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `category_posts` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `category_id` bigint unsigned NOT NULL,
-  `post_id` bigint unsigned NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_posts_category_id_foreign` (`category_id`),
-  KEY `category_posts_post_id_foreign` (`post_id`),
-  CONSTRAINT `category_posts_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `category_posts_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `category_posts`
---
-
-LOCK TABLES `category_posts` WRITE;
-/*!40000 ALTER TABLE `category_posts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category_posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -256,7 +225,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +234,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_14_113633_create_category_posts_table',1),(14,'2021_01_18_131327_create_galleries_table',1),(15,'2021_01_18_131543_add_page_id_to_galleries_table',1),(16,'2021_01_19_201735_create_images_table',1),(17,'2021_01_19_201802_add_gallery_id_to_images_table',1),(18,'2021_01_20_115021_create_contacts_table',1),(19,'2021_01_20_204353_add_page_id_to_posts',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_21_195604_add_post_id_to_categories',1),(21,'2021_01_21_195738_add_post_id_to_tags',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,9 +300,6 @@ CREATE TABLE `posts` (
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `view_count` int NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `is_approved` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `page_id` bigint unsigned NOT NULL,
@@ -352,6 +318,34 @@ CREATE TABLE `posts` (
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tags` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `post_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tags_post_id_foreign` (`post_id`),
+  CONSTRAINT `tags_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -399,7 +393,7 @@ CREATE TABLE `users` (
   `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,7 +402,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$QqrKCd8qgSw5OgbMKx4cnO7LCuw3.90oVWHQKTvwL5fX3yG8GMSa6',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john.doe@gmail.com',NULL,'$2y$10$sb241C3hMsuHu8P47xJuS.D5.rM3i3MkhcC6S8ZFah981tB0CC3vu',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,4 +444,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-20 20:50:17
+-- Dump completed on 2021-01-22 11:30:12
