@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Page;
+use App\Models\User;
+
 class Website extends Model
 {
     public function pages() {
@@ -14,4 +17,6 @@ class Website extends Model
         return $this->belongsToMany(User::class);
     }
     use HasFactory;
+
+    protected $fillable = ['url'];
 }

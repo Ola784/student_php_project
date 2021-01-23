@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Website;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -43,10 +44,23 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'url' => $request->url,
         ]));
 
         event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+
+        //tworzenie website:
+        $website = $user->website()->create([
+            'url' => $request->url,
+        ]);
+        //return view($website->url);
+        // Website::create([
+        //     'url' => $request->url,
+        //     'user_id' => $user->id,
+        // ]);
+
+
+        return redirect()->route('pages.index', ['url' => $request->url]);
     }
 }

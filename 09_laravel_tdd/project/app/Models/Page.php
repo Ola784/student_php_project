@@ -11,7 +11,7 @@ class Page extends Model
         return $this->belongsToMany(User::class);
     }
     public function website() {
-        return $this->hasOne(Website::class);
+        return $this->belongsTo(Website::class);
     }
     public function menu() {
         return $this->hasMany(Menu::class);
@@ -23,4 +23,6 @@ class Page extends Model
         return $this->hasMany(Gallery::class);
     }
     use HasFactory;
+
+    protected $fillable = ['title', 'content', 'content_markdown', 'website_id'];
 }
