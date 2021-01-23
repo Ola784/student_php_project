@@ -37,8 +37,34 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'News','2021-01-23 10:29:08','2021-01-23 10:29:08'),(2,'Opinion','2021-01-23 10:29:08','2021-01-23 10:29:08'),(3,'Tutorial','2021-01-23 10:29:08','2021-01-23 10:29:08'),(4,'Review','2021-01-23 10:29:08','2021-01-23 10:29:08');
+INSERT INTO `categories` VALUES (1,'News','2021-01-23 19:26:35','2021-01-23 19:26:35'),(2,'Opinion','2021-01-23 19:26:35','2021-01-23 19:26:35'),(3,'Tutorial','2021-01-23 19:26:35','2021-01-23 19:26:35'),(4,'Review','2021-01-23 19:26:35','2021-01-23 19:26:35');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `category_post`
+--
+
+DROP TABLE IF EXISTS `category_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `category_post` (
+  `post_id` int unsigned NOT NULL,
+  `category_id` int unsigned DEFAULT NULL,
+  KEY `category_post_post_id_foreign` (`post_id`),
+  KEY `category_post_category_id_foreign` (`category_id`),
+  CONSTRAINT `category_post_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  CONSTRAINT `category_post_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category_post`
+--
+
+LOCK TABLES `category_post` WRITE;
+/*!40000 ALTER TABLE `category_post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -223,7 +249,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +258,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_23_120603_create_post_category_table',1),(21,'2021_01_23_121537_create_post_tags_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,6 +314,32 @@ LOCK TABLES `password_resets` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `post_tag`
+--
+
+DROP TABLE IF EXISTS `post_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post_tag` (
+  `post_id` int unsigned NOT NULL,
+  `tag_id` int unsigned DEFAULT NULL,
+  KEY `post_tag_post_id_foreign` (`post_id`),
+  KEY `post_tag_tag_id_foreign` (`tag_id`),
+  CONSTRAINT `post_tag_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  CONSTRAINT `post_tag_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_tag`
+--
+
+LOCK TABLES `post_tag` WRITE;
+/*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
+/*!40000 ALTER TABLE `post_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `posts`
 --
 
@@ -295,15 +347,14 @@ DROP TABLE IF EXISTS `posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `posts` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `page_id` bigint unsigned NOT NULL,
+  `page_id` bigint unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `posts_title_unique` (`title`),
   KEY `posts_page_id_foreign` (`page_id`),
   CONSTRAINT `posts_page_id_foreign` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -326,7 +377,7 @@ DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tags` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -396,7 +447,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$bg7PX.c.NrVZt8x4Cxs8U.Qwp8KuFoPtyCJCict7VaxNO/aBEfk7y',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$PuwmLV53XldjCBCIWEwHfe85clPAz1yuX6hhaybUxJzxhuqnBRRcm',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -438,4 +489,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-23 10:29:09
+-- Dump completed on 2021-01-23 19:26:36

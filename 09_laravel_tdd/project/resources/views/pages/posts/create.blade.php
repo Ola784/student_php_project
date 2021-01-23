@@ -1,13 +1,12 @@
 
-
-
-
     <x-app-layout>
 
     @section('scripts')
+            <script src="{{"jquery.js"}}"></script>
+            <script src="{{"parsley.min.js"}}"></script>
             <script src="{{"https://cdn.tiny.cloud/1/ug2urxtldpl5qrxe9twuocjt351ia7q8mf9nibgmt5npql0d/tinymce/5/tinymce.min.js"}}"></script>
             <script>tinymce.init({selector:'textarea'});</script>
-        @show
+    @show
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -20,17 +19,10 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                             <form method="post" action="{{ route('pages.posts.store', [$url, $page]) }}">
+                                <form data-parsley-validate>
                             @csrf
 
                             <div class="mt-4">
@@ -41,6 +33,12 @@
                                 <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
                                 <textarea name="body" class="block mt-10 h-80 w-full"></textarea>
                             <br />
+                                <x-label for="category_id" class="block mt-2 w-50" :value="__('Categories:')" />
+                                @foreach ($categories as $category)
+                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" /> {{ $category->name }}
+                                    <br />
+                                @endforeach
+                                <br />
 
                                 <x-label for="tag_id" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
                                 <x-input id="tag_id" name="tag_id" class="block mt-2 w-full" type="text" value="{{ old('tags') }}" />
@@ -55,6 +53,7 @@
                                 </x-button>
                             </div>
                             </div>
+                                </form>
                             </form>
 
                     </div>

@@ -14,7 +14,7 @@ class AddPageIdToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->foreignId('page_id')->constrained()->onDelete('cascade');
+            $table->foreignId('page_id')->default('1')->constrained()->onDelete('cascade');
         });
     }
 

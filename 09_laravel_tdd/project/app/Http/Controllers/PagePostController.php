@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\StoreArticleRequest;
+use Illuminate\Support\HtmlString;
+use Parsedown;
 
 class PagePostController extends Controller
 {
@@ -16,16 +21,36 @@ class PagePostController extends Controller
 
     public function create(String $url, Page $page)
     {
-        return view('pages.posts.create', ['url' => $url], compact('page'));
+        $categories = Category::orderBy('name')->get();
+        return view('pages.posts.create', ['url' => $url], compact('page','categories'));
     }
 
-    public function store(String $url, Page $page,Request $request )
+    public function store(String $url, Page $page, Request $request, StoreArticleRequest $req)
     {
-        $posts=$page->post()->create($this->validate($request, [
+        $this->validate($request, [
             'title' => 'required',
             'body' => 'required'
-        ]));
-        return redirect()->route('pages.posts.show', [$url, $page, $posts]);
+        ]);
+
+        $post = new Post;
+        $post->title = $request->title;
+        $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
+        $post->save();
+
+        if (isset($req->categories)) {
+            $post->categories()->attach($req->categories);
+        }
+
+        if ($req->tags != '') {
+            $tags = explode(',', $req->tags);
+            foreach ($tags as $tag_name) {
+                $tag = Tag::firstOrCreate(['name' => $tag_name]);
+                $post->tags()->attach($tag);
+            }
+        }
+
+
+        return redirect()->route('pages.posts.show', [$url, $page, $post]);
     }
 
     public function show(String $url, Page $page, Post $post)
@@ -33,7 +58,12 @@ class PagePostController extends Controller
         if($post->page_id!=$page->id) {
             abort(404);
         }
-        return view('pages.posts.show', ['url' => $url], compact('page','post'));
+
+        $post->load(['categories', 'tags']);
+        $all_categories = Category::all();
+        $all_tags = Tag::all();
+
+        return view('pages.posts.show', ['url' => $url], compact('page','post', 'all_categories', 'all_tags'));
     }
 
     public function edit(String $url, Page $page, Post $post)
