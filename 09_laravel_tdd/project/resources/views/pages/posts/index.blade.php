@@ -1,38 +1,60 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Viewing a post') }}
-        </h2>
-    </x-slot>
-    @section('content')
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Newest posts</div>
-
-                        <div class="card-body">
-
-                            @forelse ($posts as $post)
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <a href="{{ route('pages.posts.show', [$url, $page, $post->id]) }}"><h2>{{ $post->title }}</h2></a>
-
-                                        <p>{{ substr($post->body, 0, 200) }}...
-                                            <a href="{{ route('pages.posts.show', [$url, $page, $post->id]) }}">Read full post</a></p>
-                                    </div>
-                                </div>
-                                <hr />
-                            @empty
-                                No posts yet.
-                            @endforelse
-
-
-                        </div>
-                    </div>
-                </div>
+        <div class ="flex items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Posts') }}
+            </h2>
+            <div class="mt-4 px-8 pb-4">
+                <form method="get" action="{{ route('pages.posts.create', [$url, $page]) }}">
+                    <x-button class=" bg-red-500 hover:bg-red-700 ml-4">
+                        {{ __('Create new...') }}
+                    </x-button>
+                </form>
             </div>
+
         </div>
-    @endsection
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+
+            @if($posts->isEmpty())
+                <p class="p-6">No posts for this page</p>
+            @else
+                @foreach($posts as $post)
+                    <table class="min-w-full  divide-y divide-gray-200">
+
+                        <div class="overflow-hidden shadow-sm sm:rounded-lg">
+
+                            <thead class="overflow-hidden shadow-sm sm:rounded-lg bg-white">
+
+                            <th scope="col"
+                                class="bg-grey-50 px-6 py-3 text-left text-s font-medium text-gray-700 tracking-wider flex justify-center">
+
+                                <a href="{{ route('pages.posts.show', [$url, $page, $post]) }}" class="btn btn-default btn-sm">{{ $post->title }}</a>
+                            </th>
+                            </a>
+                            </thead>
+
+                            <tbody class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <tr>
+                                <td class="px-6 py-4 ">
+                                    <p class="flex justify-center">
+                                        <a href="{{ route('pages.posts.show', [$url, $page, $post]) }}" class="btn btn-default btn-sm">{!!html_entity_decode($post->body)!!}</a></p>
+                                </td>
+                            </tr>
+
+                            <td class="px-6 py-4 text-left text-xs font-medium text-gray-500">Created on: {{ date('M j, Y', strtotime($post->created_at)) }} by {{$url}}</td>
+
+                            <div class="pb-10"></div>
+                            @endforeach
+                            </tbody>
+                        </div>
+
+                    </table>
+
+                    @endif
+        </div>
+    </div>
 
 </x-app-layout>
+

@@ -37,7 +37,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'News','2021-01-23 19:26:35','2021-01-23 19:26:35'),(2,'Opinion','2021-01-23 19:26:35','2021-01-23 19:26:35'),(3,'Tutorial','2021-01-23 19:26:35','2021-01-23 19:26:35'),(4,'Review','2021-01-23 19:26:35','2021-01-23 19:26:35');
+INSERT INTO `categories` VALUES (1,'News','2021-01-24 12:00:49','2021-01-24 12:00:49'),(2,'Opinion','2021-01-24 12:00:49','2021-01-24 12:00:49'),(3,'Tutorial','2021-01-24 12:00:49','2021-01-24 12:00:49'),(4,'Review','2021-01-24 12:00:49','2021-01-24 12:00:49');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +249,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_23_120603_create_post_category_table',1),(21,'2021_01_23_121537_create_post_tags_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_23_120603_create_post_category_table',1),(21,'2021_01_23_121537_create_post_tags_table',1),(22,'2021_01_23_130712_add_website_id_to_pages_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +276,10 @@ CREATE TABLE `pages` (
   `content_markdown` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `website_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pages_website_id_foreign` (`website_id`),
+  CONSTRAINT `pages_website_id_foreign` FOREIGN KEY (`website_id`) REFERENCES `websites` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -349,7 +352,6 @@ DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.png',
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -437,7 +439,8 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -447,7 +450,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$PuwmLV53XldjCBCIWEwHfe85clPAz1yuX6hhaybUxJzxhuqnBRRcm',NULL,NULL,NULL,'mypage.com');
+INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$zu9Nhtqi7oZpdBudf/S70uIYEQvAa2CfVLN1XCQClU/YYr/T5ebXe',NULL,NULL,NULL,'mypage.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -460,12 +463,12 @@ DROP TABLE IF EXISTS `websites`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `websites` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `url` bigint unsigned NOT NULL,
-  `page_id` bigint unsigned NOT NULL,
   `user_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `websites_url_unique` (`url`),
   KEY `websites_user_id_foreign` (`user_id`),
   CONSTRAINT `websites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -489,4 +492,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-23 19:26:36
+-- Dump completed on 2021-01-24 12:00:50

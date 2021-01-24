@@ -22,7 +22,6 @@
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                             <form method="post" action="{{ route('pages.posts.store', [$url, $page]) }}">
-                                <form data-parsley-validate>
                             @csrf
 
                             <div class="mt-4">
@@ -42,10 +41,7 @@
 
                                 <x-label for="tag_id" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
                                 <x-input id="tag_id" name="tag_id" class="block mt-2 w-full" type="text" value="{{ old('tags') }}" />
-                            <br />
-                                <x-label for="image" class="block mt-1 w-50" :value="__('Main image:')" />
 
-                            <input type="file" name="image" />
                             <br /><br />
                             <div class="py-7" style="display:flex; justify-content:right">
                                 <x-button class=" bg-red-500 hover:bg-red-700 ml-1">
@@ -53,7 +49,6 @@
                                 </x-button>
                             </div>
                             </div>
-                                </form>
                             </form>
 
                     </div>

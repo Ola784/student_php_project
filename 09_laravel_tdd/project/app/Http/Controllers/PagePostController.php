@@ -10,12 +10,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Post\StoreArticleRequest;
 use Illuminate\Support\HtmlString;
 use Parsedown;
+use Symfony\Component\Console\Input\Input;
 
 class PagePostController extends Controller
 {
     public function index(String $url, Page $page)
     {
-        $posts=$page->post()->get();
+        //$posts = Post::orderBy('id', 'desc')->paginate(10);
+        //return view('posts.index')->withPosts($posts)
+        $posts=$page->post()->orderBy('id', 'desc')->get();
         return view('pages.posts.index', ['url' => $url], compact('page', 'posts'));
     }
 
@@ -35,10 +38,12 @@ class PagePostController extends Controller
         $post = new Post;
         $post->title = $request->title;
         $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
+        $post->category_id = $request->category_id;
         $post->save();
 
         if (isset($req->categories)) {
-            $post->categories()->attach($req->categories);
+            $category = $req->categories;
+            $post->categories()->attach($category);
         }
 
         if ($req->tags != '') {
@@ -59,11 +64,9 @@ class PagePostController extends Controller
             abort(404);
         }
 
-        $post->load(['categories', 'tags']);
-        $all_categories = Category::all();
-        $all_tags = Tag::all();
 
-        return view('pages.posts.show', ['url' => $url], compact('page','post', 'all_categories', 'all_tags'));
+
+        return view('pages.posts.show', ['url' => $url], compact('page','post'));
     }
 
     public function edit(String $url, Page $page, Post $post)
@@ -71,7 +74,20 @@ class PagePostController extends Controller
         if($post->page_id!=$page->id) {
             abort(404);
         }
-        return view('pages.posts.edit', ['url' => $url],compact('page','post'));
+
+        $categories = Category::all();
+        $cats = array();
+        foreach ($categories as $category) {
+            $cats[$category->id] = $category->name;
+        }
+
+        $tags = Tag::all();
+        $tags2 = array();
+        foreach ($tags as $tag) {
+            $tags2[$tag->id] = $tag->name;
+        }
+
+        return view('pages.posts.edit', ['url' => $url], compact('page', 'post', 'categories'));
     }
 
     public function update(String $url, Request $request, Page $page, Post $post)
@@ -80,7 +96,24 @@ class PagePostController extends Controller
             'title' => 'required',
             'body' => 'required'
         ]));
-        return redirect()->route('pages.posts.show', [$url, $page, $post]);
+
+        $post->title = $request->title;
+        $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
+        $post->save();
+
+        if (isset($request->categories)) {
+            $post->categories()->sync($request->categories);
+        } else {
+            $post->categories()->sync(array());
+        }
+
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags);
+        } else {
+            $post->tags()->sync(array());
+        }
+
+        return redirect()->route('pages.posts.show', [$url, $page, $post]);;
     }
 
     public function destroy(String $url, Page $page, Post $post)

@@ -12,8 +12,34 @@
         </h2>
     </x-slot>
 
+
+
+
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="pb-1 flex items-center mt-4">
+            <form method="get" action="{{ route('pages.posts.index', [$url, $page, $post]) }}">
+                <x-button class=" ml-3 ">
+                    {{ __('Show all posts ') }}
+                </x-button>
+            </form>
+            <form method="get" action="{{ route('pages.posts.edit', [$url, $page, $post]) }}">
+                <x-button class="ml-4">
+                    {{ __('Edit') }}
+                </x-button>
+            </form>
+
+            <form method="post" action="{{ route('pages.posts.destroy', [$url, $page, $post]) }}">
+
+                @csrf
+                @method("DELETE")
+
+                <x-button class=" bg-red-500 hover:bg-red-700 ml-4">
+                    {{ __('Delete') }}
+                </x-button>
+            </form>
+        </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -26,30 +52,16 @@
                         <dl>
 
 
-                            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 mt-6">
+                            <div class="bg-white px-4 pb-12 max-w-6xl mx-auto sm:px-6 lg:px-8 mt-6">
                                     {!!html_entity_decode($post->body)!!}
                             </div>
 
+                            <b>Categories: {{$post->category}}</b>
 
-                            <div class="bg-white py-14 px-4 pb-5 flex items-center justify-end mt-4">
 
-                                <form method="get" action="{{ route('pages.menus.edit', [$url, $page, $post]) }}">
-                                    <x-button class="ml-4">
-                                        {{ __('Edit') }}
-                                    </x-button>
-                                </form>
 
-                                <form method="post" action="{{ route('pages.menus.destroy', [$url, $page, $post]) }}">
-
-                                    @csrf
-                                    @method("DELETE")
-
-                                    <x-button class=" bg-red-500 hover:bg-red-700 ml-4">
-                                        {{ __('Delete') }}
-                                    </x-button>
-                                </form>
-                            </div>
                         </dl>
+
                     </div>
                 </div>
             </div>
