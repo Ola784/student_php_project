@@ -17,9 +17,6 @@ class PageController extends Controller
             abort(404);
             
         $website = $user->website()->get()->first();
-        
-        //$websites = Website::all()->get();
-        //$website = $websites[0];
         $pages = $website->pages()->get();
 
         return view('pages.index', ['url' => $url])->withPages($pages);
@@ -32,6 +29,13 @@ class PageController extends Controller
 
     public function show(String $url, Page $page)
     {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
+            abort(404);
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+
         return view('pages.show', ['url' => $url])->withPage($page);
     }
 
@@ -61,14 +65,24 @@ class PageController extends Controller
 
     public function edit(String $url,Page $page)
     {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
+            abort(404);
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+
         return view('pages.edit',['url' => $url])->withPage($page);
     }
 
-    public function update(String $url,Request $request, Page $page)
+    public function update(String $url, Request $request, Page $page)
     {
         $user = auth()->user();
         if ($user == null || $url != $user->url)
             abort(404);
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
 
         $this->validate($request, [
             'title' => 'required',
@@ -84,6 +98,13 @@ class PageController extends Controller
 
     public function destroy(String $url,Page $page)
     {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
+            abort(404);
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+            
         $page->delete();
         return redirect()->route('pages.index',$url);
     }

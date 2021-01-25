@@ -12,6 +12,15 @@ class GalleryImageController extends Controller
 {
     public function index(String $url, Page $page, Gallery $gallery)
     {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
+            abort(404);
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+
         $images = $gallery->images()->get();
         return view('pages.galleries.images.index', ['url' => $url], compact('page', 'gallery', 'images'));
     }
@@ -44,20 +53,33 @@ class GalleryImageController extends Controller
 
     public function show(String $url, Page $page, Gallery $gallery, Image $image)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+        if($image->gallery_id != $gallery->id)
+            return abort(404);
 
         return view('pages.galleries.images.show', ['url' => $url], compact('page', 'gallery', 'image'));
     }
 
     public function edit(String $url, Page $page, Gallery $gallery, Image $image)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+        if($image->gallery_id != $gallery->id)
+            return abort(404);
+
         return view('pages.galleries.images.edit', ['url' => $url], compact('page','gallery','image'));
     }
 
@@ -78,10 +100,17 @@ class GalleryImageController extends Controller
 
     public function destroy(String $url, Page $page, Gallery $gallery, Image $image)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+        if($image->gallery_id != $gallery->id)
+            return abort(404);
+            
         File::delete(public_path() . '/images/' . $image->file);
         $image->delete();
         return redirect()->route('pages.galleries.show', [$url, $page, $gallery]);

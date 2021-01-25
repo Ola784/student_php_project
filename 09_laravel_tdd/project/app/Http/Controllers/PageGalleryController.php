@@ -10,6 +10,13 @@ class PageGalleryController extends Controller
 {
     public function index(String $url, Page $page)
     {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
+            abort(404);
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+
         $galleries = $page->gallery()->get();
         return view('pages.galleries.index', ['url' => $url], compact('page', 'galleries'));
     }
@@ -29,10 +36,15 @@ class PageGalleryController extends Controller
 
     public function show(String $url, Page $page, Gallery $gallery)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+
         $images = $gallery->images()->get();
 
         //redirect?
@@ -41,10 +53,15 @@ class PageGalleryController extends Controller
 
     public function edit(String $url, Page $page, Gallery $gallery)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+
         return view('pages.galleries.edit', ['url' => $url],compact('page','gallery'));
     }
 
@@ -58,20 +75,30 @@ class PageGalleryController extends Controller
 
     public function destroy(String $url, Page $page, Gallery $gallery)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+
         $gallery->delete();
         return redirect()->route('pages.galleries.index', [$url, $page]);
     }
 
     public function add_image(String $url, Page $page, Gallery $gallery)
     {
-        if($gallery->page_id != $page->id)
-        {
+        $user = auth()->user();
+        if ($user == null || $url != $user->url)
             abort(404);
-        }
+        $website = $user->website()->get()->first();
+        if (($website == null) || ($page->website_id != $website->id))
+            return abort(404);
+        if($gallery->page_id != $page->id)
+            return abort(404);
+            
         return view('pages.galleries.images.create', ['url' => $url], compact('page'));
     }
 }
