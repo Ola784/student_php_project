@@ -21,6 +21,11 @@
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
                         </div>
 
+                        <div class="mt-4">
+                            <x-label for="title" :value="__('Link')" />
+                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
 
                             <x-button class="ml-4">

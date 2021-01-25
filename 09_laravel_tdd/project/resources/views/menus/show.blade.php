@@ -26,6 +26,12 @@
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                     {{ $menu->title }}
                                 </dd>
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Link
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {{ $menu->link }}
+                                </dd>
                             </div>
                             <div class="bg-white px-4 pb-5 flex items-center justify-end mt-4">
 

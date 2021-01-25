@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'John Doe',
-            'email' => 'john1111111.doe@gmail.com',
+            'email' => 'john.doe@gmail.com',
             'password' => bcrypt('secret'),
             'url'=> 'mypage.com'
         ]);
