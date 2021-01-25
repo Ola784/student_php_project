@@ -12,12 +12,15 @@ class WebsiteController extends Controller
     public function index(String $url)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $website = Website::where('url', $url)->first();
         if ($website == null)
             abort(404);
 
         $page = $website->pages()->get()->first();
 =======
+=======
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
         //$website = Website::where('url', $url)->first();
         //if ($website == null)
           //  abort(404);
@@ -31,16 +34,22 @@ class WebsiteController extends Controller
     public function show(String $url, Page $page)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $website = Website::where('url', $url)->first();
         if (($website == null) || ($page->website_id != $website->id))
             return abort(404);
 
 =======
+=======
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
        // $website = Website::where('url', $url)->first();
         //return view($website->url);
         //$user = auth()->user();
         //$website = $user->website();
         //return view($website->url);
+<<<<<<< HEAD
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
+=======
 >>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
         $galleries = $page->gallery()->get();
         $menus     = $page->menu()->get();

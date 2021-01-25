@@ -38,7 +38,11 @@ CREATE TABLE `categories` (
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO `categories` VALUES (1,'News','2021-01-25 11:42:31','2021-01-25 11:42:31'),(2,'Opinion','2021-01-25 11:42:31','2021-01-25 11:42:31'),(3,'Tutorial','2021-01-25 11:42:31','2021-01-25 11:42:31'),(4,'Review','2021-01-25 11:42:31','2021-01-25 11:42:31');
+=======
+INSERT INTO `categories` VALUES (1,'News','2021-01-24 12:00:49','2021-01-24 12:00:49'),(2,'Opinion','2021-01-24 12:00:49','2021-01-24 12:00:49'),(3,'Tutorial','2021-01-24 12:00:49','2021-01-24 12:00:49'),(4,'Review','2021-01-24 12:00:49','2021-01-24 12:00:49');
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
 =======
 INSERT INTO `categories` VALUES (1,'News','2021-01-24 12:00:49','2021-01-24 12:00:49'),(2,'Opinion','2021-01-24 12:00:49','2021-01-24 12:00:49'),(3,'Tutorial','2021-01-24 12:00:49','2021-01-24 12:00:49'),(4,'Review','2021-01-24 12:00:49','2021-01-24 12:00:49');
 >>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
@@ -263,7 +267,11 @@ CREATE TABLE `migrations` (
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_21_195604_add_category_id_to_post',1),(21,'2021_01_21_195738_add_tag_id_to_post',1),(22,'2021_01_23_130712_add_website_id_to_pages_table',1);
+=======
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_23_120603_create_post_category_table',1),(21,'2021_01_23_121537_create_post_tags_table',1),(22,'2021_01_23_130712_add_website_id_to_pages_table',1);
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
 =======
 INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2020_12_15_145710_create_comments_table',1),(5,'2021_01_09_095028_create_pages_table',1),(6,'2021_01_09_100010_create_user_page_table',1),(7,'2021_01_11_150433_add_url_to_users',1),(8,'2021_01_11_153310_create_menus_table',1),(9,'2021_01_13_115139_create_websites_table',1),(10,'2021_01_13_132547_add_page_id_to_menus_table',1),(11,'2021_01_14_113503_create_categories_table',1),(12,'2021_01_14_113608_create_posts_table',1),(13,'2021_01_18_131327_create_galleries_table',1),(14,'2021_01_18_131543_add_page_id_to_galleries_table',1),(15,'2021_01_19_201735_create_images_table',1),(16,'2021_01_19_201802_add_gallery_id_to_images_table',1),(17,'2021_01_20_115021_create_contacts_table',1),(18,'2021_01_20_204353_add_page_id_to_posts',1),(19,'2021_01_21_180926_create_tags_table',1),(20,'2021_01_23_120603_create_post_category_table',1),(21,'2021_01_23_121537_create_post_tags_table',1),(22,'2021_01_23_130712_add_website_id_to_pages_table',1);
 >>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
@@ -364,9 +372,13 @@ CREATE TABLE `posts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
   `page_id` bigint unsigned NOT NULL,
   `category_id` int unsigned DEFAULT NULL,
   `tag_id` bigint unsigned DEFAULT NULL,
+=======
+  `page_id` bigint unsigned NOT NULL DEFAULT '1',
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
 =======
   `page_id` bigint unsigned NOT NULL DEFAULT '1',
 >>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
@@ -465,7 +477,11 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$05Qhn2OyGD3vaBGLCYC53.ZymtTUY4r5qNPudP0RjUiv5ZI3c5Ln2',NULL,NULL,NULL,'mypage.com');
+=======
+INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$zu9Nhtqi7oZpdBudf/S70uIYEQvAa2CfVLN1XCQClU/YYr/T5ebXe',NULL,NULL,NULL,'mypage.com');
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
 =======
 INSERT INTO `users` VALUES (1,'John Doe','john1111111.doe@gmail.com',NULL,'$2y$10$zu9Nhtqi7oZpdBudf/S70uIYEQvAa2CfVLN1XCQClU/YYr/T5ebXe',NULL,NULL,NULL,'mypage.com');
 >>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
@@ -511,7 +527,11 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Dump completed on 2021-01-25 11:42:33
+=======
+-- Dump completed on 2021-01-24 12:00:50
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
 =======
 -- Dump completed on 2021-01-24 12:00:50
 >>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
