@@ -24,7 +24,7 @@
                         </x-button>
                     </form>
 
-                    <form method="get" action="{{ route('pages.posts.create', [$url, $page]) }}">
+                    <form method="get" action="{{ route('pages.posts.index', [$url, $page]) }}">
                         <x-button class=" bg-red-500 hover:bg-red-700 ml-3">
                         {{ __('posts') }}
                         </x-button>

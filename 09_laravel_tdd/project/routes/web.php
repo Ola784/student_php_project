@@ -56,9 +56,15 @@ Route::get('/contact', [App\Http\Controllers\EmailController::class, 'index']);
 Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'send']);
 
 // finalna strona:
+<<<<<<< HEAD
 Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@index')->name('index');
 //Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@show')->name('website');
 Route::resource('/{url}.com/pages', WebsiteController::class, ['only' => ['index','show']])->names([
+=======
+//Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@index')->name('index');
+Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@show')->name('website');
+Route::resource('/{url}.com/page', WebsiteController::class, ['only' => ['index','show']])->names([
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
     'index' => 'website',
     'show' => 'website.show'
 ]);

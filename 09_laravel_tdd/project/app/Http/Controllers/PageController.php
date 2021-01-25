@@ -42,8 +42,11 @@ class PageController extends Controller
             abort(404);
             
         $website = $user->website()->get()->first();
+<<<<<<< HEAD
         if ($erbsite == null)
             abort(404);
+=======
+>>>>>>> 0fbafa1ccd02890e588f3f5bd2ad44dd8e2e6faa
 
         $this->validate($request, [
             'title' => 'required'

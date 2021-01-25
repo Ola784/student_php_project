@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Page;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\StoreArticleRequest;
 
 
 
@@ -19,7 +22,9 @@ class PostController extends Controller
 
     public function create(String $url, Page $page)
     {
-        return view('pages.posts.create', ['url' => $url], compact('page'));
+        $categories = Category::orderBy('name')->get();
+        return view('pages.posts.create', ['url' => $url], compact('categories'));
+
     }
 
     public function store(String $url, Page $page, Request $request)
@@ -27,6 +32,19 @@ class PostController extends Controller
         $post = $page->post()->create($this->validate($request, [
             'title' => 'required'
         ]));
+
+        if (isset($request->categories)) {
+            $post->categories()->attach($request->categories);
+        }
+
+        if ($request->tags != '') {
+            $tags = explode(',', $request->tags);
+            foreach ($tags as $tag_name) {
+                $tag = Tag::firstOrCreate(['name' => $tag_name]);
+                $post->tags()->attach($tag);
+            }
+        }
+
         return redirect()->route('pages.posts.show', [$url, $page, $post]);
     }
 
@@ -36,7 +54,11 @@ class PostController extends Controller
             abort(404);
         }
 
-        return view('pages.posts.show', ['url' => $url], compact('page','post'));
+        $post->load(['categories', 'tags']);
+        $all_categories = Category::all();
+        $all_tags = Tag::all();
+
+        return view('pages.posts.show', ['url' => $url], compact('page','post', 'all_categories', 'all_tags'));
     }
 
     public function update(String $url, Request $request, Page $page, Post $post)
