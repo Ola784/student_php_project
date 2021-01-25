@@ -31,16 +31,6 @@
 
                                 <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
                                 <textarea name="body" class="block mt-10 h-80 w-full"></textarea>
-                            <br />
-                                <x-label for="category_id" class="block mt-2 w-50" :value="__('Categories:')" />
-                                @foreach ($categories as $category)
-                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" /> {{ $category->name }}
-                                    <br />
-                                @endforeach
-                                <br />
-
-                                <x-label for="tag_id" class="block mt-2 w-50" :value="__('Tags (comma-separated):')" />
-                                <x-input id="tag_id" name="tag_id" class="block mt-2 w-full" type="text" value="{{ old('tags') }}" />
 
                             <br /><br />
                             <div class="py-7" style="display:flex; justify-content:right">

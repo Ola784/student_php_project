@@ -38,7 +38,6 @@ class PagePostController extends Controller
         $post = new Post;
         $post->title = $request->title;
         $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
-        $post->category_id = $request->category_id;
         $post->save();
 
         if (isset($req->categories)) {

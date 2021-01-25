@@ -18,7 +18,9 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
 
             @if($posts->isEmpty())
-                <p class="p-6">No posts for this page</p>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <p class="p-6 flex justify-center">No posts for this page.</p>
+                </div>
             @else
                 @foreach($posts as $post)
                     <table class="min-w-full  divide-y divide-gray-200">
