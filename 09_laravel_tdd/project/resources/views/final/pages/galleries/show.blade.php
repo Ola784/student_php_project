@@ -2,7 +2,7 @@
 
     {{--HEADER Z PRZYCISKAMI--}}
     <x-slot name="header">
-        <form method="get" action="{{ route('final.pages.show', [$url, $page]) }}">
+        <form method="get" action="{{ route('website.show', [$url, $page]) }}">
             <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
                 {{ __('go back ') }}
             </x-button>

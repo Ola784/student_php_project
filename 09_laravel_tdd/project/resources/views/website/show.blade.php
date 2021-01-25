@@ -51,6 +51,25 @@
     </div>
 </nav>
 
+{{--LINKI DO GALERII--}}
+<div class="container w-full md:max-w-3xl mx-auto pt-20">
+<table class="min-w-full divide-y divide-gray-200">
+    
+        @foreach($galleries as $gallery)
+        <tr>
+            <td class="px-1 py-1 whitespace-nowrap">
+                <form method="get" action="{{ route('final.pages.galleries.show', [$url, $page, $gallery]) }}">
+                    <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
+                        {{ __($gallery->title) }}
+                    </x-button>
+                </form>
+            </td>
+            </tr>
+        @endforeach
+    
+</table>
+</div>
+
 <!--Container-->
 <div class="container w-full md:max-w-3xl mx-auto pt-20">
     {!!html_entity_decode($page->content)!!}

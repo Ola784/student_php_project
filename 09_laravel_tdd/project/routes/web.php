@@ -57,11 +57,11 @@ Route::post('/sendemail/send', [App\Http\Controllers\EmailController::class, 'se
 
 // finalna strona:
 Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@index')->name('index');
-Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@show')->name('show');
-// Route::resource('/{url}.com', WebsiteController::class, ['only' => ['index','show']])->names([
-//     'index' => 'website',
-//     'show' => 'website.show'
-// ]);
+//Route::get('/{url}.com', 'App\Http\Controllers\WebsiteController@show')->name('website');
+Route::resource('/{url}.com/pages', WebsiteController::class, ['only' => ['index','show']])->names([
+    'index' => 'website',
+    'show' => 'website.show'
+]);
 Route::resource('{url}.com/pages.galleries', FinalPageGalleryController::class, ['only' => ['show']])->names([
     'show' => 'final.pages.galleries.show'
 ]);
