@@ -3,14 +3,15 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('List of menus') }}
         </h2>
-        <div align="center" style="padding: 4px">
-            <form method="get" action="{{ route('pages.show', [$url, $page]) }}">
-                <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
-                    {{ __('go back ') }}
-                </x-button>
-            </form>
-        </div>
     </x-slot>
+
+    <div align="center" style="padding: 4px">
+        <form method="get" action="{{ route('pages.show', [$url, $page]) }}">
+            <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
+                {{ __('go back ') }}
+            </x-button>
+        </form>
+    </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

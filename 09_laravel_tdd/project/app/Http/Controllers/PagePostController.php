@@ -24,8 +24,7 @@ class PagePostController extends Controller
 
     public function create(String $url, Page $page)
     {
-        $categories = Category::orderBy('name')->get();
-        return view('pages.posts.create', ['url' => $url], compact('page','categories'));
+        return view('pages.posts.create', ['url' => $url], compact('page'));
     }
 
     public function store(String $url, Page $page, Request $request, StoreArticleRequest $req)
@@ -40,20 +39,6 @@ class PagePostController extends Controller
         $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
         $post->save();
 
-        if (isset($req->categories)) {
-            $category = $req->categories;
-            $post->categories()->attach($category);
-        }
-
-        if ($req->tags != '') {
-            $tags = explode(',', $req->tags);
-            foreach ($tags as $tag_name) {
-                $tag = Tag::firstOrCreate(['name' => $tag_name]);
-                $post->tags()->attach($tag);
-            }
-        }
-
-
         return redirect()->route('pages.posts.show', [$url, $page, $post]);
     }
 
@@ -62,8 +47,6 @@ class PagePostController extends Controller
         if($post->page_id!=$page->id) {
             abort(404);
         }
-
-
 
         return view('pages.posts.show', ['url' => $url], compact('page','post'));
     }
@@ -74,19 +57,7 @@ class PagePostController extends Controller
             abort(404);
         }
 
-        $categories = Category::all();
-        $cats = array();
-        foreach ($categories as $category) {
-            $cats[$category->id] = $category->name;
-        }
-
-        $tags = Tag::all();
-        $tags2 = array();
-        foreach ($tags as $tag) {
-            $tags2[$tag->id] = $tag->name;
-        }
-
-        return view('pages.posts.edit', ['url' => $url], compact('page', 'post', 'categories'));
+        return view('pages.posts.edit', ['url' => $url], compact('page', 'post'));
     }
 
     public function update(String $url, Request $request, Page $page, Post $post)
@@ -99,18 +70,6 @@ class PagePostController extends Controller
         $post->title = $request->title;
         $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
         $post->save();
-
-        if (isset($request->categories)) {
-            $post->categories()->sync($request->categories);
-        } else {
-            $post->categories()->sync(array());
-        }
-
-        if (isset($request->tags)) {
-            $post->tags()->sync($request->tags);
-        } else {
-            $post->tags()->sync(array());
-        }
 
         return redirect()->route('pages.posts.show', [$url, $page, $post]);;
     }

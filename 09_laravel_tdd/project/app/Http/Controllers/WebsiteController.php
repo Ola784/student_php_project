@@ -27,6 +27,7 @@ class WebsiteController extends Controller
 
         $galleries = $page->gallery()->get();
         $menus     = $page->menu()->get();
-        return view('website.show', ['url' => $url], compact('page', 'menus', 'galleries'));
+        $posts     = $page->post()->orderBy('id', 'desc')->get();
+        return view('website.show', ['url' => $url], compact('page', 'menus', 'galleries', 'posts'));
     }
 }

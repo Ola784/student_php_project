@@ -1,7 +1,5 @@
 <x-app-layout>
     @section('scripts')
-        <script src="{{"jquery.js"}}"></script>
-        <script src="{{"parsley.min.js"}}"></script>
         <script src="{{"https://cdn.tiny.cloud/1/ug2urxtldpl5qrxe9twuocjt351ia7q8mf9nibgmt5npql0d/tinymce/5/tinymce.min.js"}}"></script>
         <script>tinymce.init({selector:'textarea'});</script>
     @show
@@ -11,6 +9,14 @@
             {{ __('Editing a post') }}
         </h2>
     </x-slot>
+
+    <div align="center" style="padding: 4px">
+        <form method="get" action="{{ route('pages.posts.show', [$url, $page, $post]) }}">
+            <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
+                 {{ __('go back ') }}
+            </x-button>
+        </form>
+    </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -32,13 +38,6 @@
 
                             <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
                             <textarea name="body" class="block mt-10 h-80 w-full">{{ $post->body }}</textarea>
-                            <br />
-                            <x-label for="category_id" class="block mt-2 w-50" :value="__('Categories:')" />
-                            @foreach ($categories as $category)
-                                <input type="checkbox" name="category_id" :value="{{ $category->id }}" /> {{ $category->name }}
-                                <br />
-                            @endforeach
-                            <br />
 
                             <br /><br />
                             <div class="py-7" style="display:flex; justify-content:right">

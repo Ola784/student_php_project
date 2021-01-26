@@ -12,6 +12,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\FinalPageController;
 use App\Http\Controllers\FinalPageGalleryController;
 use App\Http\Controllers\FinalGalleryImageController;
+use App\Http\Controllers\FinalPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +68,7 @@ Route::resource('{url}.com/pages.galleries', FinalPageGalleryController::class, 
 ]);
 Route::resource('{url}.com/pages.galleries.images', FinalGalleryImageController::class, ['only' => ['show']])->names([
     'show' => 'final.pages.galleries.images.show'
+]);
+Route::resource('{url}.com/pages.posts', FinalPostController::class, ['only' => ['show']])->names([
+    'show' => 'final.pages.posts.show'
 ]);
