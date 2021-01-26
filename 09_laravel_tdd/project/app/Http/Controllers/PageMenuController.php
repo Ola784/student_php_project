@@ -23,7 +23,8 @@ class PageMenuController extends Controller
     public function store(String $url, Page $page,Request $request )
     {
         $menus=$page->menu()->create($this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'link'=> 'required'
         ]));
         return redirect()->route('pages.menus.show', [$url, $page, $menus]);
     }
@@ -49,7 +50,8 @@ class PageMenuController extends Controller
     public function update(String $url, Request $request, Page $page, Menu $menu)
     {
         $menu->update($this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'link'=> 'required'
         ]));
         return redirect()->route('pages.menus.show', [$url, $page,$menu]);
     }

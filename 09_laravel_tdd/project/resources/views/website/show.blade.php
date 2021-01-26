@@ -43,7 +43,7 @@
             <ul class="list-reset lg:flex justify-end flex-1 items-center">
                 @foreach($menus as $menu)
                     <li class="px-2 md:px-4">
-                        <a href="" class="text-green-800 font-semibold hover:text-green-600"> {{$menu->title}} </a>
+                        <a href="{{$menu->link}}" class="text-green-800 font-semibold hover:text-green-600"> {{$menu->title}} </a>
                     </li>
                 @endforeach
             </ul>
@@ -54,7 +54,7 @@
 {{--LINKI DO GALERII--}}
 <div class="container w-full md:max-w-3xl mx-auto pt-20">
 <table class="min-w-full divide-y divide-gray-200">
-    
+
         @foreach($galleries as $gallery)
         <tr>
             <td class="px-1 py-1 whitespace-nowrap">
@@ -66,7 +66,7 @@
             </td>
             </tr>
         @endforeach
-    
+
 </table>
 </div>
 

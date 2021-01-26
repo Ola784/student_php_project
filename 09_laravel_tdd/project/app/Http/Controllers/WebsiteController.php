@@ -16,12 +16,6 @@ class WebsiteController extends Controller
             abort(404);
 
         $page = $website->pages()->get()->first();
-        //$website = Website::where('url', $url)->first();
-        //if ($website == null)
-          //  abort(404);
-
-          //return view($website->url);
-        $page = Page::all()->first();
         return redirect()->route('website.show', [$url, $page]);
     }
 
@@ -31,11 +25,6 @@ class WebsiteController extends Controller
         if (($website == null) || ($page->website_id != $website->id))
             return abort(404);
 
-       // $website = Website::where('url', $url)->first();
-        //return view($website->url);
-        //$user = auth()->user();
-        //$website = $user->website();
-        //return view($website->url);
         $galleries = $page->gallery()->get();
         $menus     = $page->menu()->get();
         return view('website.show', ['url' => $url], compact('page', 'menus', 'galleries'));
