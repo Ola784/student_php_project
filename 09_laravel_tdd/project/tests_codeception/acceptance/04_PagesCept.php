@@ -6,9 +6,9 @@ $I->wantTo('have pages under website');
 $I->amOnPage('/dashboard');
 $I->seeCurrentUrlEquals('/login');
 
-$url='mypage.com';
+$url='mypage';
 
-$I->fillField('email', 'john1.doe@gmail.com');
+$I->fillField('email', 'john.doe@gmail.com');
 $I->fillField('password', 'secret');
 $I->fillField('url', $url);
 
@@ -16,24 +16,34 @@ $I->click('Login');
 
 $I->seeCurrentUrlEquals('/dashboard');
 
+/*
 $website_id=$I->haveInDatabase('websites', [
     'url' => $url,
     'user_id' => 1
+])*/
+/*
+$website_id=$I->seeInDatabase('websites', [
+    'url' => $url,
+    'user_id' => 1
+]);*/
+
+$website_id = $I->grabFromDatabase('websites', 'id', [
+    'url' => $url
 ]);
 
-$I->amOnPage($url.'/admin/pages');
+$I->amOnPage($url.'.com/admin/pages');
 
-$I->see('No pages in database');
+$I->see('There are no pages yet');
 
 $I->click('Create new...');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/create');
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/create');
 
 $I->see('Creating a page', 'h2');
 
 $I->click('Create');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/create');
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/create');
 
 $I->see('The title field is required.', 'li');
 
@@ -48,32 +58,33 @@ $I->dontSeeInDatabase('pages', [
 $I->click('Create');
 
 $I->SeeInDatabase('pages', [
-    'title' => $pageTitle
+    'title' => $pageTitle,
+    'website_id'=> $website_id
 ]);
 
 $pageID = $I->grabFromDatabase('pages', 'id', [
     'title' => $pageTitle
 ]);
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID);
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/'.$pageID);
 
 
 $I->see("Viewing a page", 'h2');
 $I->see('menus');
 $I->see('posts');
-$I->see('gallery');
+$I->see('galleries');
 
-$I->amOnPage('/'.$url.'/admin/pages');
+$I->amOnPage('/'.$url.'.com/admin/pages');
 
 $I->see("$pageTitle", 'tr > td');
 
 $I->click('Details');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID);
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/'.$pageID);
 
 $I->click('Edit');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID. '/edit');
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/'.$pageID. '/edit');
 $I->see('Editing a page', 'h2');
 
 $I->seeInField('title', $pageTitle);
@@ -82,7 +93,7 @@ $I->fillField('title', "");
 
 $I->click('Update');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID. '/edit');
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/'.$pageID. '/edit');
 $I->see('The title field is required.', 'li');
 
 $pageNewTitle = 'NewPageTitle';
@@ -90,7 +101,7 @@ $pageNewTitle = 'NewPageTitle';
 $I->fillField('title', $pageNewTitle);
 $I->click('Update');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages/'.$pageID);
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages/'.$pageID);
 
 //$I->see($pageNewTitle);
 
@@ -104,7 +115,7 @@ $I->seeInDatabase('pages', [
 
 $I->click('Delete');
 
-$I->seeCurrentUrlEquals('/'.$url.'/admin/pages');
+$I->seeCurrentUrlEquals('/'.$url.'.com/admin/pages');
 
 $I->dontSeeInDatabase('pages', [
     'title' => $pageNewTitle
