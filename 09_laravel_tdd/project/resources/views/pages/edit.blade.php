@@ -19,10 +19,12 @@
                         <div class="mt-4">
                             <x-label for="title" :value="__('Title')" />
                             <x-input id="title"  class="block mt-1 w-full" type="text" name="title" :value="$page->title" />
-                            <x-label for="cnt" :value="__('Content HTML')" />
-                            <x-input id="cnt"  class="block mt-6 w-full h-60" type="text" name="cnt" :value="old('content')" />
-                            <x-label for="cnt2" :value="__('Content MARKDOWN')" />
-                            <x-input id="cnt2" class="block mt-6 w-full h-60" type="text" name="cnt2" :value="old('content_markdown')" />
+
+                            <x-label for="cnt" :value="__('Content HTML')" style="padding-top: 32px"/>
+                            <textarea id="cnt"  class="block mt-6 w-full h-60" type="text" name="cnt" style="rows: 5">{{ $page->content }}</textarea>
+
+                            <x-label for="cnt2" :value="__('Content MARKDOWN')" style="padding-top: 32px" />
+                            <textarea id="cnt2" class="block mt-6 w-full h-60" type="text" name="cnt2">{{ $page->content_markdown }}</textarea>
                         </div>
                         <div class="flex items-center justify-end mt-4">
 

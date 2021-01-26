@@ -69,9 +69,10 @@
     <div class="flex justify-center">
         <div class="w-2/3">
             @if($posts->isEmpty())
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                {{--<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <p class="p-6 flex justify-center">No posts for this page.</p>
                 </div>
+                --}}
 
             @else
                 @foreach($posts as $post)
@@ -136,6 +137,7 @@
                     <div class="pt-10"> <!--Odstep-->
 
                         <!--Galleries-->
+                        @if(!$galleries->isEmpty())
                         <div class="overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="bg-white pb-3 pt-3">
                                 <h1 class="text-lg leading-6 text-gray-900 flex justify-center">
@@ -165,6 +167,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
