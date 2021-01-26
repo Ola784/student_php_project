@@ -8,7 +8,7 @@ $I->seeCurrentUrlEquals('/login');
 
 $url='mypage.com';
 
-$I->fillField('email', 'john.doe@gmail.com');
+$I->fillField('email', 'john1.doe@gmail.com');
 $I->fillField('password', 'secret');
 $I->fillField('url', $url);
 
@@ -16,7 +16,12 @@ $I->click('Login');
 
 $I->seeCurrentUrlEquals('/dashboard');
 
-$I->amOnPage('/'.$url.'/admin');
+$website_id=$I->haveInDatabase('websites', [
+    'url' => $url,
+    'user_id' => 1
+]);
+
+$I->amOnPage($url.'/admin/pages');
 
 $I->see('No pages in database');
 
