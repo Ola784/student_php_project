@@ -6,11 +6,20 @@
 
     @show
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Viewing a post') }}
-        </h2>
-    </x-slot>
+        <x-slot name="header">
+            <div class ="flex items-center">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Viewing a post') }}
+                </h2>
+                <div class="mt-4 px-8 pb-4">
+                    <form method="get" action="{{ route('pages.posts.index', [$url, $page]) }}">
+                        <x-button class="ml-4">
+                            {{ __('Show all posts') }}
+                        </x-button>
+                    </form>
+                </div>
+            </div>
+        </x-slot>
 
 
 
@@ -18,12 +27,7 @@
 
     <div class="py-12">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        <div class="pb-1 flex items-center mt-4">
-            <form method="get" action="{{ route('pages.posts.index', [$url, $page, $post]) }}">
-                <x-button class=" ml-3 ">
-                    {{ __('Show all posts ') }}
-                </x-button>
-            </form>
+        <div class="pb-1 flex items-center flex justify-end mt-4">
             <form method="get" action="{{ route('pages.posts.edit', [$url, $page, $post]) }}">
                 <x-button class="ml-4">
                     {{ __('Edit') }}

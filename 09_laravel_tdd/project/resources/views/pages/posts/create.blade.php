@@ -12,8 +12,16 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Creating a post') }}
             </h2>
-
         </x-slot>
+
+        <div align="center" style="padding: 4px">
+            <form method="get" action="{{ route('pages.posts.index', [$url, $page]) }}">
+                <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
+                    {{ __('go back ') }}
+                </x-button>
+            </form>
+        </div>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -30,7 +38,7 @@
                             <br />
 
                                 <x-label for="body" class="block mt-1 w-50 " :value="__('Post Body')" />
-                                <textarea name="body" class="block mt-10 h-80 w-full"></textarea>
+                                <textarea name="body" class="block mt-6 h-80 w-full"></textarea>
 
                             <br /><br />
                             <div class="py-7" style="display:flex; justify-content:right">
