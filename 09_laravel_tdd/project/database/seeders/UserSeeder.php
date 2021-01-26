@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\User;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -14,11 +16,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $example_user = User::create([
             'name' => 'John Doe',
             'email' => 'john.doe@gmail.com',
             'password' => bcrypt('secret'),
-            'url'=> 'mypage.com'
+            'url'=> 'mypage',
+        ]);
+
+        $example_user->website()->create([
+            'url' => 'mypage',
         ]);
     }
 }

@@ -30,11 +30,11 @@
         @if (Route::has('login'))
                 <div>
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-lg  bg-gray-300 text-gray-700 underline">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class="text-lg  bg-gray-300 text-gray-700 underline" style="font-size:32px">Dashboard</a>
                     @else
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-lg bg-gray-300 text-gray-700 underline">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-lg bg-gray-300 text-gray-700 underline" style="font-size:32px">Register</a>
                         @endif
                     @endauth
                 </div>
