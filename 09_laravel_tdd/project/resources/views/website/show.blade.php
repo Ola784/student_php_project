@@ -43,7 +43,7 @@
             <ul class="list-reset lg:flex justify-end flex-1 items-center">
                 @foreach($menus as $menu)
                     <li class="px-2 md:px-4">
-                        <a href="$menu->link" class="text-green-800 font-semibold hover:text-green-600"> {{$menu->title}} </a>
+                        <a href="{{$menu->link}}" class="text-green-800 font-semibold hover:text-green-600"> {{$menu->title}} </a>
                     </li>
                 @endforeach
             </ul>

@@ -11,7 +11,8 @@ class Menu extends Model
         return $this->belongsTo(Page::class);
     }
     protected $fillable = [
-       'title'
+       'title',
+        'link'
     ];
     use HasFactory;
 }

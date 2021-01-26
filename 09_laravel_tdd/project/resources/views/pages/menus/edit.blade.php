@@ -23,6 +23,12 @@
                         </div>
 
 
+                        <div class="mt-4">
+                            <x-label for="link" :value="__('Link')" />
+                            <x-input id="link" class="block mt-1 w-full" type="text" name="link" :value="$menu->link" />
+                        </div>
+
+
                         <div class="flex items-center justify-end mt-4">
 
                             <x-button class=" bg-red-500 hover:bg-red-700 ml-4">

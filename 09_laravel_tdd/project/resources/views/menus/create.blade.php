@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Creating a menus') }}
+            {{ __('Creating a menu') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -22,8 +22,8 @@
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="title" :value="__('Link')" />
-                            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
+                            <x-label for="link" :value="__('Link')" />
+                            <x-input id="link" class="block mt-1 w-full" type="text" name="link" :value="old('link')" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
