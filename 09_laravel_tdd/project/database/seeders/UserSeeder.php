@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
         $page_renaissance = $example->pages()->create([
             'title' => "Renaissance",
             'content' => "<div style=\"font-size: 64px\">RENAISSANCE</div>",
-            'content_markdown' => new HtmlString(app(Parsedown::class)->text('***Markdown***<br>*Post-impressionism* was a cool **period**')),
+            'content_markdown' => new HtmlString(app(Parsedown::class)->text('***Markdown***<br>*Renaissance* was a cool **period**')),
         ]);
 
         $page_postimpressionism = $example->pages()->create([
@@ -60,7 +60,7 @@ class UserSeeder extends Seeder
         ]);
 
         $page_empty = $example->pages()->create([
-            'title' => "",
+            'title' => "empty",
             'content' => "",
             'content_markdown' => new HtmlString(app(Parsedown::class)->text('')),
         ]);

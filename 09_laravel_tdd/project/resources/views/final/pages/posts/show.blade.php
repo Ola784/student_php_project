@@ -1,11 +1,11 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <div class ="flex items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Viewing a post') }}
-            </h2>
-        </div>
+        <form method="get" action="{{ route('website.show', [$url, $page]) }}">
+            <x-button class=" bg-red-500 hover:bg-red-700 ml-3 ">
+                {{ __('go back ') }}
+            </x-button>
+        </form>
     </x-slot>
 
 

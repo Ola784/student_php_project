@@ -29,6 +29,11 @@
                     <div class="border-t border-gray-200">
                         <dl>
                             {{--TABELA--}}
+
+                            @if($images->isEmpty())
+                                <p class="p-6">No images for this gallery</p>
+                            @else
+
                             <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
@@ -57,6 +62,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @endif
 
                             <div class="bg-white px-4 pb-5 flex items-center justify-end mt-4">
 

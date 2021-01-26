@@ -59,12 +59,16 @@
 
 <!--Container-->
 <div class="container w-full md:max-w-5xl mx-auto pt-20">
+    @if(!empty($page->content))
     <div class="flex justify-center px-6 py-4 pt-10 text-red-500">
         <p> {!!html_entity_decode($page->content)!!}</p>
     </div>
+    @endif
+    @if(!empty($page->content_markdown))
     <div class="flex justify-center px-6 py-4 mt-1 pb-20 text-red-500">
         <p> {!!html_entity_decode($page->content_markdown)!!}</p>
     </div>
+    @endif
     <!--Posty-->
     <div class="flex justify-center">
         <div class="w-2/3">
@@ -106,26 +110,13 @@
         <!--SideBar-->
         <div class="w-1/3">
             <div class="flex justify-end">
-                <div class="w-3/5">
+                <div class="w-4/5">
                     <!--About-->
                     <div class="overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="bg-white pb-3 pt-3">
-                            <h1 class="text-lg leading-6 text-gray-900 flex justify-center">
-                                About
-                            </h1>
-                        </div>
-                        <div class="bg-grey-50 pb-0.5"></div>
-                        <div class="bg-white pb-4">
-                            <div class="px-6 py-4 ">
-                                <p class="flex justify-center">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    In ut hendrerit arcu, et sagittis lectus.
-                                    Maecenas laoreet, elit ut consectetur tempor.
-                                </p>
-                            </div>
+                        <div class="bg-white pb-4" style="padding: 1px">
                             <!--Contact-->
                             <form method="get" action="/contact">
-                                <div class="flex justify-center mt-2">
+                                <div class="flex justify-center mt-2" style="padding: 1px">
                                     <x-button>
                                         {{ __('contact') }}
                                     </x-button>
