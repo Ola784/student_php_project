@@ -34,10 +34,10 @@ class PagePostController extends Controller
             'body' => 'required'
         ]);
 
-        $post = new Post;
-        $post->title = $request->title;
-        $post->body = new HtmlString(app(Parsedown::class)->text($request->body));
-        $post->save();
+        $post = $page->post()->create([
+            'title' => $request->title,
+            'body' => new HtmlString(app(Parsedown::class)->text($request->body)),
+        ]);
 
         return redirect()->route('pages.posts.show', [$url, $page, $post]);
     }
