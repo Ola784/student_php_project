@@ -18,7 +18,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 @if($posts->isEmpty())
-                    <p class="p-6">No posts in database.</p>
+                    <p class="p-6">No posts for this page</p>
                 @else
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
