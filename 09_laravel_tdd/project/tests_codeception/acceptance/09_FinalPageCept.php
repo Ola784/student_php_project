@@ -60,6 +60,8 @@ $postID=$I->haveInDatabase('posts', [
     'body'=>$body
 ]);
 
+$postlink= '/'.$url.'.com/pages/'.$pageID.'/posts/'.$postID;
+
 $I->amOnPage('/'.$url.'.com/page/'.$pageID);
 $I->click($pageTitle);
 $I->seeCurrentUrlEquals('/'.$url.'.com/page/'.$pageID);
@@ -77,4 +79,14 @@ $I->seeCurrentUrlEquals($gallerylink);
 
 $I->amOnPage('/'.$url.'.com/page/'.$pageID);
 $I->click($postTitle);
-//$I->seeCurrentUrlEquals($link);
+$I->seeCurrentUrlEquals($postlink);
+
+$I->amOnPage('/'.$url.'.com/page/'.$pageID);
+$I->see($postTitle);
+$I->see($body);
+$I->click("contact");
+$I->seeCurrentUrlEquals("/contact");
+$I->see("Name");
+$I->see("Email");
+$I->see("Message");
+

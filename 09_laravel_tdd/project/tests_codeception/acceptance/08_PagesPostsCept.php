@@ -77,9 +77,9 @@ $I->see($postTitle);
 
 $I->amOnPage('/' . $url . '.com/admin/pages/' . $pageID . '/posts');
 
-$I->see("$postBody", 'tr > td');
+$I->see($postTitle, 'tr > td');
 
-$I->click($postTitle);
+$I->click("Details");
 
 $I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/posts/' . $postID);
 
@@ -87,54 +87,55 @@ $I->click('Edit');
 
 $I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/posts/' . $postID . '/edit');
 $I->see('Editing a post', 'h2');
-/*
-$I->seeInField('title', $menuTitle);
+
+$I->seeInField('title', $postTitle);
 
 $I->fillField('title', "");
 
 $I->click('Update');
 
-$I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/menus/' . $menuID . '/edit');
+$I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/posts/' . $postID . '/edit');
 $I->see('The title field is required.', 'li');
 
-$menuNewTitle = 'NewMenuTitle';
+$NewTitle = 'NewTitle';
 
-$I->fillField('title', $menuNewTitle);
+$I->fillField('title', $NewTitle);
 $I->click('Update');
 
-$I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/menus/' . $menuID);
+$I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/posts/' . $postID);
 
-$I->see($menuNewTitle);
+$I->see($NewTitle);
 
-$I->dontSeeInDatabase('menus', [
-    'title' => $menuTitle
+$I->dontSeeInDatabase('posts', [
+    'title' => $postTitle
 ]);
 
-$I->SeeInDatabase('menus', [
-    'title' => $menuNewTitle
+$I->SeeInDatabase('posts', [
+    'title' => $NewTitle
 ]);
 
 $I->click('Delete');
 
-$I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/menus');
+$I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID . '/posts');
 
-$I->dontSeeInDatabase('menus', [
-    'title' => $menuNewTitle,
+$I->dontSeeInDatabase('posts', [
+    'title' => $NewTitle,
 ]);
 
 $pageTitle2 = "SomeTitleTest2";
+$body2="Lorem Impsum v2";
 
 $pageID2 = $I->haveInDatabase('pages', [
     'title' => $pageTitle2,
     'website_id' => $website_id
 ]);
 
-$menuTitle2 = 'NewExampleTitle';
+$Title2 = 'NewExampleTitle';
 
-$I->haveInDatabase('menus', [
-    'title' => $menuTitle2,
-    'page_id' => $pageID2,
-    'link' => $link
+$I->haveInDatabase('posts', [
+    'title' => $Title2,
+    'body'=>$body2,
+    'page_id' => $pageID2
 ]);
 
 $I->amOnPage('/' . $url . '.com/admin/pages/' . $pageID2);
@@ -145,8 +146,8 @@ $I->dontSeeInDatabase('pages', [
     'title' => $pageTitle2
 ]);
 
-$I->dontSeeInDatabase('menus', [
-    'title' => $menuTitle2,
+$I->dontSeeInDatabase('posts', [
+    'title' => $Title2,
     'page_id' => $pageID2
 ]);
-*/
+
