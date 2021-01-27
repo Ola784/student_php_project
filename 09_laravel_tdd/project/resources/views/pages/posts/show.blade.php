@@ -51,7 +51,7 @@
                                     </x-button>
                                 </form>
 
-                                <form method="post" action="{{ route('pages.menus.destroy', [$url, $page, $post]) }}">
+                                <form method="post" action="{{ route('pages.posts.destroy', [$url, $page, $post]) }}">
 
                                     @csrf
                                     @method("DELETE")
