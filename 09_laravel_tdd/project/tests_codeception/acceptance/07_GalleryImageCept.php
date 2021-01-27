@@ -36,16 +36,15 @@ $galleryID = $I->haveInDatabase('galleries', [
 
 $I->amOnPage('/' . $url . '.com/admin/pages/' . $pageID.'/galleries/'.$galleryID);
 
-$I->click('add image');
+$I->see("no images for this gallery");
 
-//$I->see("no images for this gallery");
+$I->click('add image');
 
 $I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID.'/galleries/'.$galleryID.'/images/create');
 
 $I->see("Adding an image");
 
-$I->click('Create');
-//$I->click('Add');
+$I->click('Add');
 
 $I->seeCurrentUrlEquals('/' . $url . '.com/admin/pages/' . $pageID.'/galleries/'.$galleryID.'/images/create');
 
@@ -53,19 +52,17 @@ $I->see('The title field is required.', 'li');
 $I->see('The file field is required.', 'li');
 
 $imageTitle = "SomeTitleImage";
-$imageFile="flower.png";
+$imageFile = "image.jpeg";
 
-$I->fillField('title', $imageTitle);/*
-$I->fillField('file',$imageFile);
+$I->fillField('title', $imageTitle);
+$I->attachFile('input[name=file]', 'image.jpeg');
 
 $I->dontSeeInDatabase('images', [
     'title' => $imageTitle
 ]);
 
-$I->click('Create');
-//$I->click('Add');
+$I->click('Add');
 
 $I->seeInDatabase('images', [
     'title' => $imageTitle
 ]);
-*/
